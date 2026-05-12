@@ -367,11 +367,24 @@ def build_dataframe(topology_key: str) -> pd.DataFrame:
 # ─────────────────────────────────────────────────────────────────────────────
 
 
+def _build_hue_kw(hue: str | None, palette: str) -> dict:
+    """
+    Kembalikan dict keyword untuk parameter hue & palette seaborn.
+    Jika hue=None, kembalikan dict kosong agar seaborn pakai warna default —
+    mencegah FutureWarning 'palette without hue'.
+    """
+    if hue is not None:
+        return {"hue": hue, "palette": palette}
+    return {}
+
+
 def _seaborn_barplot(
-    ax: plt.Axes, data: pd.DataFrame, x: str, y: str, hue: str, palette: str
+    ax: plt.Axes, data: pd.DataFrame, x: str, y: str, hue: str | None, palette: str
 ) -> None:
     """Grouped bar chart dengan error bar ±SD. Kompatibel seaborn < 0.12 dan >= 0.12."""
-    kw: dict = dict(data=data, x=x, y=y, hue=hue, palette=palette, ax=ax, capsize=0.05)
+    kw: dict = dict(
+        data=data, x=x, y=y, ax=ax, capsize=0.05, **_build_hue_kw(hue, palette)
+    )
     if _SNS_NEW:
         kw["errorbar"] = "sd"
     else:
@@ -380,11 +393,17 @@ def _seaborn_barplot(
 
 
 def _seaborn_lineplot(
-    ax: plt.Axes, data: pd.DataFrame, x: str, y: str, hue: str, palette: str
+    ax: plt.Axes, data: pd.DataFrame, x: str, y: str, hue: str | None, palette: str
 ) -> None:
     """Line plot. Kompatibel seaborn < 0.12 dan >= 0.12."""
     kw: dict = dict(
-        data=data, x=x, y=y, hue=hue, palette=palette, ax=ax, markers=True, dashes=False
+        data=data,
+        x=x,
+        y=y,
+        ax=ax,
+        markers=True,
+        dashes=False,
+        **_build_hue_kw(hue, palette),
     )
     if _SNS_NEW:
         kw["errorbar"] = None
@@ -394,10 +413,12 @@ def _seaborn_lineplot(
 
 
 def _seaborn_pointplot(
-    ax: plt.Axes, data: pd.DataFrame, x: str, y: str, hue: str, palette: str
+    ax: plt.Axes, data: pd.DataFrame, x: str, y: str, hue: str | None, palette: str
 ) -> None:
-    """Point plot / scatter. Fallback ke scatterplot jika gagal."""
-    kw: dict = dict(data=data, x=x, y=y, hue=hue, palette=palette, ax=ax, dodge=True)
+    """Point plot / scatter. dodge hanya aktif saat hue ada. Fallback ke scatter jika gagal."""
+    kw: dict = dict(data=data, x=x, y=y, ax=ax, **_build_hue_kw(hue, palette))
+    if hue is not None:
+        kw["dodge"] = True  # dodge hanya bermakna saat ada hue
     if _SNS_NEW:
         kw["errorbar"] = None
     else:
@@ -405,26 +426,42 @@ def _seaborn_pointplot(
     try:
         sns.pointplot(**kw)
     except TypeError:
-        # Jika ada parameter yang tidak kompatibel, coba tanpa dodge
         kw.pop("dodge", None)
         try:
             sns.pointplot(**kw)
         except Exception:
-            # Final fallback ke scatter
+            # Final fallback ke scatterplot
             sns.scatterplot(
-                data=data, x=x, y=y, hue=hue, palette=palette, ax=ax, s=80, alpha=0.8
+                data=data,
+                x=x,
+                y=y,
+                ax=ax,
+                s=80,
+                alpha=0.8,
+                **_build_hue_kw(hue, palette),
             )
 
 
 def _seaborn_violinplot(
-    ax: plt.Axes, data: pd.DataFrame, x: str, y: str, hue: str, palette: str
+    ax: plt.Axes, data: pd.DataFrame, x: str, y: str, hue: str | None, palette: str
 ) -> None:
     """Violin plot. Fallback ke boxplot jika data terlalu sedikit untuk KDE."""
+    kw = dict(data=data, x=x, y=y, ax=ax, **_build_hue_kw(hue, palette))
     try:
-        sns.violinplot(data=data, x=x, y=y, hue=hue, palette=palette, ax=ax)
+        sns.violinplot(**kw)
     except Exception as exc:
         print(f"  [Info] Violin plot gagal ({exc}) → fallback ke boxplot.")
-        sns.boxplot(data=data, x=x, y=y, hue=hue, palette=palette, ax=ax)
+        sns.boxplot(**kw)
+
+
+# Prefix nama file untuk setiap jenis grafik
+_CHART_PREFIX: dict[str, str] = {
+    "bar": "bar_chart",
+    "box": "boxplot",
+    "line": "line_plot",
+    "violin": "violin_plot",
+    "point": "point_plot",
+}
 
 
 def make_plot(
@@ -434,82 +471,109 @@ def make_plot(
     chart_label: str,
     topo_label: str,
     topo_key: str,
+    algo_filter: str | None,  # None  = semua algoritma (grafik perbandingan)
+    scenario_filter: str | None,  # None  = semua skenario (gabungan)
+    scenario_idx: int,  # 0=semua, 1-N=skenario tertentu (untuk nama file)
 ) -> None:
     """
-    Filter DataFrame berdasarkan 'metric', buat grafik seaborn yang dipilih,
-    dan simpan sebagai PNG DPI-300 ke:
-      visualize/{topo_key}/{metric}/{prefix}_{metric}.png
+    Filter DataFrame, pilih sumbu secara otomatis, buat grafik, dan simpan ke:
+      visualize/{topo_key}/{metric}/{algo}_{metric}_{scenario_idx}_{chart_prefix}.png
+
+    Logika sumbu:
+      algo_filter=None  + scenario_filter=None  → X=Algorithm,  hue=Scenario
+      algo_filter=None  + scenario_filter=<scn> → X=Algorithm,  hue=None
+      algo_filter=<alg> + scenario_filter=None  → X=Scenario,   hue=None
+      algo_filter=<alg> + scenario_filter=<scn> → X=Scenario,   hue=None
     """
     # ── 1. Filter data ────────────────────────────────────────────────────────
     plot_df = df[df["Metric"] == metric].copy()
 
+    if algo_filter is not None:
+        plot_df = plot_df[plot_df["Algorithm"] == algo_filter]
+
+    if scenario_filter is not None:
+        plot_df = plot_df[plot_df["Scenario"] == scenario_filter]
+
     if plot_df.empty:
-        print(f"\n  [Error] Tidak ada data untuk metrik '{metric}'.")
+        print(
+            f"\n  [Error] Tidak ada data untuk kombinasi filter yang dipilih."
+            f"\n          Metrik='{metric}', Algoritma='{algo_filter}', "
+            f"Skenario='{scenario_filter}'"
+        )
         return
 
-    # Urutkan algoritma agar konsisten di semua grafik
-    plot_df = plot_df.sort_values("Algorithm")
+    # ── 2. Tentukan sumbu X dan Hue secara otomatis ───────────────────────────
+    # Satu algoritma terpilih → X = Scenario (lebih informatif per-algo)
+    # Semua algoritma        → X = Algorithm, Hue = Scenario (perbandingan)
+    if algo_filter is not None:
+        x_col = "Scenario"
+        hue_col = None  # single algo: warna berbeda tidak dibutuhkan
+    else:
+        x_col = "Algorithm"
+        hue_col = "Scenario" if scenario_filter is None else None
 
-    # ── 2. Buat folder output ─────────────────────────────────────────────────
+    plot_df = plot_df.sort_values(x_col)
+
+    # ── 3. Nama file: {algo}_{metric}_{scenario_idx}_{chart_prefix}.png ───────
+    algo_part = algo_filter if algo_filter is not None else "all"
+    filename = f"{algo_part}_{metric}_{scenario_idx}_{_CHART_PREFIX[chart_type]}.png"
+
     out_dir = os.path.join(OUTPUT_BASE, topo_key, metric)
     os.makedirs(out_dir, exist_ok=True)
-
-    prefix_map = {
-        "bar": "bar_chart",
-        "box": "boxplot",
-        "line": "line_plot",
-        "violin": "violin_plot",
-        "point": "point_plot",
-    }
-    filename = f"{prefix_map[chart_type]}_{metric}.png"
     out_path = os.path.join(out_dir, filename)
 
-    # ── 3. Buat figure ────────────────────────────────────────────────────────
+    # ── 4. Buat figure ────────────────────────────────────────────────────────
     fig, ax = plt.subplots(figsize=(13, 6))
 
     try:
         if chart_type == "bar":
-            _seaborn_barplot(ax, plot_df, "Algorithm", "Value", "Scenario", PALETTE)
+            _seaborn_barplot(ax, plot_df, x_col, "Value", hue_col, PALETTE)
 
         elif chart_type == "box":
-            sns.boxplot(
+            kw = dict(
                 data=plot_df,
-                x="Algorithm",
+                x=x_col,
                 y="Value",
-                hue="Scenario",
-                palette=PALETTE,
                 ax=ax,
+                **_build_hue_kw(hue_col, PALETTE),
             )
+            sns.boxplot(**kw)
 
         elif chart_type == "line":
-            _seaborn_lineplot(ax, plot_df, "Algorithm", "Value", "Scenario", PALETTE)
+            _seaborn_lineplot(ax, plot_df, x_col, "Value", hue_col, PALETTE)
 
         elif chart_type == "violin":
-            _seaborn_violinplot(ax, plot_df, "Algorithm", "Value", "Scenario", PALETTE)
+            _seaborn_violinplot(ax, plot_df, x_col, "Value", hue_col, PALETTE)
 
         elif chart_type == "point":
-            _seaborn_pointplot(ax, plot_df, "Algorithm", "Value", "Scenario", PALETTE)
+            _seaborn_pointplot(ax, plot_df, x_col, "Value", hue_col, PALETTE)
 
     except Exception as exc:
         print(f"\n  [Error] Gagal membuat {chart_label}: {exc}")
         plt.close(fig)
         return
 
-    # ── 4. Styling ─────────────────────────────────────────────────────────────
+    # ── 5. Styling ─────────────────────────────────────────────────────────────
+    # Judul mencantumkan algo dan skenario yang dipilih
+    algo_title = algo_filter or "All Algorithms"
+    scn_title = scenario_filter or "All Scenarios"
     title = (
         f"{metric.replace('_', ' ').title()}"
-        f"  ·  {topo_label} Topology"
-        f"  ·  {chart_label}"
+        f"  ·  {topo_label}"
+        f"  ·  {algo_title}"
+        f"  ·  {scn_title}"
     )
-    ax.set_title(title, fontsize=13, fontweight="bold", pad=12)
-    ax.set_xlabel("Algorithm", fontsize=11, labelpad=8)
+    ax.set_title(title, fontsize=12, fontweight="bold", pad=12)
+    ax.set_xlabel(x_col.replace("_", " "), fontsize=11, labelpad=8)
     ax.set_ylabel(metric.replace("_", " ").title(), fontsize=11, labelpad=8)
-    ax.tick_params(axis="x", rotation=30)
+    # Scenario names bisa panjang → rotasi lebih besar
+    rotation = 40 if x_col == "Scenario" else 30
+    ax.tick_params(axis="x", rotation=rotation)
     ax.grid(axis="y", linestyle="--", alpha=0.4)
 
-    # Pindahkan legend ke luar area grafik
+    # Legend hanya ditampilkan jika ada hue (multi-skenario pada grafik perbandingan)
     legend = ax.get_legend()
-    if legend is not None:
+    if legend is not None and hue_col is not None:
         ax.legend(
             title="Scenario",
             bbox_to_anchor=(1.01, 1),
@@ -517,20 +581,24 @@ def make_plot(
             borderaxespad=0,
             framealpha=0.9,
         )
+    elif legend is not None:
+        legend.remove()  # hapus legend kosong
 
-    # ── 5. Simpan ─────────────────────────────────────────────────────────────
+    # ── 6. Simpan ─────────────────────────────────────────────────────────────
     plt.tight_layout()
     try:
         plt.savefig(out_path, dpi=300, bbox_inches="tight")
         rel_path = os.path.relpath(out_path, REPO_ROOT)
         print(f"\n  ✓ Grafik disimpan  →  {rel_path}")
-        print(f"     Metrik   : {metric}")
-        print(f"     Topologi : {topo_label}")
-        print(f"     Grafik   : {chart_label}")
+        print(f"     Nama file   : {filename}")
+        print(f"     Algoritma   : {algo_title}")
+        print(f"     Skenario    : {scn_title}")
+        print(f"     Metrik      : {metric}")
+        print(f"     Grafik      : {chart_label}")
         print(
-            f"     Baris    : {len(plot_df)}  |  "
-            f"Algoritma: {plot_df['Algorithm'].nunique()}  |  "
-            f"Skenario : {plot_df['Scenario'].nunique()}"
+            f"     Data        : {len(plot_df)} baris  |  "
+            f"{plot_df['Algorithm'].nunique()} algoritma  |  "
+            f"{plot_df['Scenario'].nunique()} skenario"
         )
     except Exception as exc:
         print(f"\n  [Error] Gagal menyimpan file: {exc}")
@@ -577,33 +645,48 @@ def _prompt_choice(
         print(f"  [!] Input tidak valid: '{raw}'. Silakan pilih dari daftar di atas.\n")
 
 
-def _prompt_metric(metrics: list[str]) -> str:
+def _prompt_list(
+    heading: str,
+    items: list[str],
+    all_label: str | None = None,
+) -> tuple[str | None, int]:
     """
-    Tampilkan daftar metrik yang ada di DataFrame dan kembalikan pilihan user.
-    Ketik nomor sesuai daftar, atau 'q' untuk keluar.
+    Tampilkan daftar items dan kembalikan (item_terpilih, index).
+
+    all_label:
+        Jika di-set, opsi 0 ditampilkan sebagai pilihan "semua".
+        Jika None, user harus memilih salah satu item (tidak ada opsi "semua").
+
+    Returns:
+        (None, 0)    → user memilih opsi "semua" (hanya jika all_label di-set)
+        (item, idx)  → user memilih item[idx-1]  (idx 1-based)
     """
-    print("\n  Metrik yang tersedia (dari kolom 'Metric'):")
+    print(f"\n{heading}")
     print()
-    for i, m in enumerate(metrics, 1):
-        print(f"  {i:>3}. {m}")
+    if all_label is not None:
+        print(f"    {'0':>2}. {all_label}")
+    for i, item in enumerate(items, 1):
+        print(f"    {i:>2}. {item}")
     print()
-    print("    q. Keluar")
+    print("     q. Keluar")
+
+    lo = 0 if all_label is not None else 1
+    hi = len(items)
 
     while True:
-        raw = input("\n  Pilih nomor metrik: ").strip().lower()
-
+        raw = input("\n  Pilihan Anda: ").strip().lower()
         if raw == "q":
             print("\n  Keluar dari program.")
             sys.exit(0)
-
         try:
-            idx = int(raw) - 1
-            if 0 <= idx < len(metrics):
-                return metrics[idx]
+            idx = int(raw)
+            if lo <= idx <= hi:
+                if idx == 0:
+                    return None, 0
+                return items[idx - 1], idx
         except ValueError:
             pass
-
-        print(f"  [!] Input tidak valid. Masukkan angka 1–{len(metrics)}.\n")
+        print(f"  [!] Masukkan angka {lo}–{hi}.\n")
 
 
 # ─────────────────────────────────────────────────────────────────────────────
@@ -650,11 +733,11 @@ def main() -> None:
         print(f"  Data sampel untuk '{topo_label_demo}' sudah siap.")
         print("  Lanjutkan ke visualisasi...\n")
 
-    # ── Loop Utama ────────────────────────────────────────────────────────────
+    # ── Loop Utama ─────────────────────────────────────────────────────────────
     while True:
-        # ── [1/3] Pilih Topologi ──────────────────────────────────────────────
+        # ── [1/5] Pilih Topologi ──────────────────────────────────────────────
         _, topo_label, topo_key = _prompt_choice(
-            "[1/3]  Pilih Topologi:", TOPOLOGY_OPTIONS
+            "[1/5]  Pilih Topologi:", TOPOLOGY_OPTIONS
         )
         print(f"\n  ✓ Topologi dipilih: {topo_label} ({topo_key})")
 
@@ -683,35 +766,83 @@ def main() -> None:
             input("  Tekan Enter untuk kembali ke menu...")
             continue
 
-        metrics = sorted(df["Metric"].unique().tolist())
-        n_algo = df["Algorithm"].nunique()
-        n_rows = len(df)
-        n_scn = df["Scenario"].nunique()
-
+        all_algorithms = sorted(df["Algorithm"].unique().tolist())
+        all_metrics = sorted(df["Metric"].unique().tolist())
         print(
-            f"  ✓ Data dimuat: {n_rows} baris  |  {len(metrics)} metrik  |  "
-            f"{n_algo} algoritma  |  {n_scn} skenario"
+            f"  ✓ Data dimuat: {len(df)} baris  |  "
+            f"{len(all_metrics)} metrik  |  "
+            f"{len(all_algorithms)} algoritma  |  "
+            f"{df['Scenario'].nunique()} skenario"
         )
 
-        # ── [2/3] Pilih Metrik ────────────────────────────────────────────────
-        print("\n[2/3]  Pilih Metrik:")
-        metric = _prompt_metric(metrics)
-        count = int((df["Metric"] == metric).sum())
-        print(f"\n  ✓ Metrik dipilih: '{metric}'  ({count} baris data)")
+        # ── [2/5] Pilih Algoritma ───────────────────────────────────────────────
+        print("\n[2/5]  Pilih Algoritma:")
+        algo_filter, _ = _prompt_list(
+            "  Algoritma yang tersedia:",
+            all_algorithms,
+            all_label="Semua Algoritma  (grafik perbandingan)",
+        )
+        algo_label = algo_filter or "Semua Algoritma"
+        print(f"\n  ✓ Algoritma : {algo_label}")
 
-        # ── [3/3] Pilih Jenis Grafik ──────────────────────────────────────────
+        # Saring DataFrame untuk langkah berikutnya (metric & scenario discovery)
+        view_df = df if algo_filter is None else df[df["Algorithm"] == algo_filter]
+
+        # ── [3/5] Pilih Metrik ─────────────────────────────────────────────────
+        metrics = sorted(view_df["Metric"].unique().tolist())
+        print("\n[3/5]  Pilih Metrik  (dari kolom 'Metric'):")
+        metric, _ = _prompt_list(
+            "  Metrik yang tersedia:",
+            metrics,
+            all_label=None,  # harus pilih satu metrik
+        )
+        count = int((view_df["Metric"] == metric).sum())
+        print(f"\n  ✓ Metrik    : '{metric}'  ({count} baris data)")
+
+        # ── [4/5] Pilih Skenario ───────────────────────────────────────────────
+        # Cari skenario yang relevan dengan metrik DAN algoritma yang sudah dipilih
+        scenario_df = view_df[view_df["Metric"] == metric]
+        scenarios = sorted(scenario_df["Scenario"].unique().tolist())
+        print("\n[4/5]  Pilih Skenario:")
+        scenario_filter, scenario_idx = _prompt_list(
+            "  Skenario yang tersedia:",
+            scenarios,
+            all_label="Semua Skenario  (gabungan, idx = 0)",
+        )
+        scn_label = scenario_filter or "Semua Skenario"
+        print(f"\n  ✓ Skenario  : {scn_label}  (idx = {scenario_idx})")
+
+        # ── [5/5] Pilih Jenis Grafik ───────────────────────────────────────────
         _, chart_label, chart_type = _prompt_choice(
-            "[3/3]  Pilih Jenis Grafik:", CHART_OPTIONS
+            "[5/5]  Pilih Jenis Grafik:", CHART_OPTIONS
         )
-        print(f"\n  ✓ Grafik: {chart_label}")
+        print(f"\n  ✓ Grafik    : {chart_label}")
+
+        # ── Preview nama file yang akan dibuat ────────────────────────────────
+        algo_part = algo_filter or "all"
+        preview_name = (
+            f"{algo_part}_{metric}_{scenario_idx}_{_CHART_PREFIX[chart_type]}.png"
+        )
+        preview_path = os.path.join("visualize", topo_key, metric, preview_name)
+        print(f"\n  ▸  Output   : {preview_path}")
 
         # ── Buat & Simpan Grafik ──────────────────────────────────────────────
         _sep()
         print(f"  Membuat {chart_label}...")
 
-        make_plot(df, metric, chart_type, chart_label, topo_label, topo_key)
+        make_plot(
+            df=df,
+            metric=metric,
+            chart_type=chart_type,
+            chart_label=chart_label,
+            topo_label=topo_label,
+            topo_key=topo_key,
+            algo_filter=algo_filter,
+            scenario_filter=scenario_filter,
+            scenario_idx=scenario_idx,
+        )
 
-        # ── Lanjut? ───────────────────────────────────────────────────────────
+        # ── Lanjut? ─────────────────────────────────────────────────────────────
         _sep()
         while True:
             repeat = input("  Buat grafik lain? (y/n): ").strip().lower()
