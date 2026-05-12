@@ -1,0 +1,24 @@
+JUDUL PROPOSAL 
+Analisis Komparatif Performa Algoritme Perutean Dijkstra, A*, dan Bellman-Ford pada Arsitektur Jaringan Hierarkis dan Mesh. 
+
+ANGGOTA KELOMPOK
+Muhammad Ghazy Humaidi (245150200111071)
+Alif Kusuma Fauzan (24150201111051 )
+Arizan Nuril Firdaus (245150207111087)
+Rafiqi Abyan Rasyadan (245150207111099)
+Muhammad Fatih Satrio (235150200111018)
+
+PILIH TOPIK
+Topik 1: Analisis Perbandingan Algoritme Perutean SPF 
+
+TUJUAN
+Proyek ini difokuskan pada pengujian empiris dan komparasi kuantitatif terhadap efisiensi algoritma perutean. Tiga tujuan utama yang terukur adalah:
+Mengevaluasi dan membandingkan perilaku algoritme perutean jalur tunggal (Dijkstra, A*, Bellman-Ford, BFS) pada dua topologi dengan karakteristik struktural yang kontras: Topologi Hierarkis (kaku/minim redundansi) dan Topologi Mesh (fleksibel/kaya redundansi) menggunakan emulasi Mininet.
+Mengumpulkan data telemetri secara terotomatisasi untuk menganalisis performa algoritme berdasarkan empat metrik kuantitatif: Waktu Konvergensi Rute, Latensi End-to-End, Throughput, dan Jumlah Hop (Hop Count).
+Menghasilkan analisis komparatif yang mengkorelasikan data performa metrik dengan kompleksitas algoritmik masing-masing protokol, guna merekomendasikan algoritme paling optimal untuk studi kasus arsitektur kampus dan pusat data.
+
+PERAN
+Muhammad Ghazy Humaidi: Perancang ide, validator seluruh proses, pembuatan topologi jaringan,  Analisis Algoritma dan ekstraksi data matriks, penulisan laporan
+Aurizan Nuril Firdaus: Analisis Algoritma dan ekstraksi data matriks, penulisan laporan
+Alif Kusuma Fauzan:  Analisis Algoritma dan ekstraksi data matriks, penulisan laporan
+Rafiqi Abyan Rasyadan: Analisis Algoritma dan ekstraksi data matriks, penulisan laporan

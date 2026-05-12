@@ -1,0 +1,268 @@
+MATA KULIAH: ARSITEKTUR JARINGAN MODERN
+SDN Shortest Path Forwarding
+
+Panduan Proyek Akhir Kelompok
+
+Ukuran Kelompok:  3 – 5 Mahasiswa
+Repositori Referensi:  github.com/abazh/learn_sdn
+Durasi Proyek:  6 Minggu
+
+Bangun. Ukur. Pahami.
+
+Daftar Isi
+Daftar Isi2
+Bagian I: Ikhtisar Proyek dan Capaian Pembelajaran3
+1.1 Misi Proyek3
+1.2 Capaian Pembelajaran3
+1.3 Persyaratan Dasar (Berlaku untuk Semua Topik)3
+1.4 Penilaian3
+Bagian II: Tiga Topik Proyek5
+Topik 1: Analisis Perbandingan Algoritme Perutean SPF5
+Topik 2: Implementasi dan Analisis Multipath SPF5
+Topik 3: Implementasi Algoritme Perutean SPF/Multipath5
+Bagian III: Tahapan, Deliverable, dan Panduan Kelompok7
+3.1 Rencana Waktu (6 Minggu)7
+3.2 Struktur Kelompok (3–5 Anggota)7
+3.3 Ketentuan Teknis7
+3.4 Daftar Periksa Pengumpulan7
+Bagian IV: Template Laporan8
+4.1 Halaman Judul8
+4.2 Abstrak (200–300 kata)8
+4.3 Pendahuluan (1–2 halaman)8
+4.4 Landasan Teori (2–3 halaman)8
+4.5 Metodologi (2–3 halaman)8
+4.6 Implementasi (1–2 halaman)8
+4.7 Hasil dan Analisis (3–4 halaman)9
+4.8 Kesimpulan dan Saran (1 halaman)9
+4.9 Daftar Pustaka9
+4.10 Lampiran9
+Bagian V: Rubrik Penilaian10
+5.1 Bobot Rubrik10
+5.2 Rincian Rubrik10
+5.3 Catatan Penilaian12
+
+Catatan: Klik kanan pada daftar isi di atas dan pilih “Update Field” untuk memperbarui nomor halaman setelah pengeditan dokumen.
+
+Bagian I: Ikhtisar Proyek dan Capaian Pembelajaran
+1.1 Misi Proyek
+Proyek akhir kelompok ini bertujuan untuk memperdalam pemahaman mahasiswa terhadap algoritme perutean Shortest Path First (SPF) dalam konteks Software-Defined Networking. Dengan menggunakan modul SPF dari repositori learn_sdn sebagai fondasi, setiap kelompok akan memilih satu topik, melakukan komparasi atau implementasi sederhana, serta menghasilkan analisis terhadap perilaku algoritme yang diuji.
+
+Proyek ini dirancang agar berfokus pada pemahaman mendalam terhadap algoritme yang telah tersedia, variasi topologi, serta kemampuan menganalisis hasil emulasi secara kuantitatif. Penilaian tidak mensyaratkan inovasi algoritmik yang kompleks; kelompok lebih dihargai atas kemampuannya menguji, membandingkan, dan menginterpretasikan hasil secara sistematis dan logis.
+1.2 Capaian Pembelajaran
+CP1 – Pemahaman Algoritmik: Memahami cara kerja minimal tiga algoritme perutean dalam kerangka kerja controller SDN (OSKen + Mininet) dan menganalisis kelebihan serta keterbatasannya.
+CP2 – Perancangan Eksperimen: Merancang eksperimen jaringan yang dapat diulang dengan topologi dan beban lalu lintas yang variatif, serta mengumpulkan data telemetri secara konsisten.
+CP3 – Analisis Komparatif: Membandingkan performa algoritme berdasarkan metrik kuantitatif dan menjelaskan perbedaannya dengan merujuk pada karakteristik algoritmik serta struktur topologi.
+CP4 – Komunikasi Teknis: Menyusun laporan kelompok yang terstruktur dengan baik, mencakup dokumentasi implementasi, hasil eksperimen, serta kesimpulan yang didukung oleh bukti.
+CP5 – Kolaborasi: Bekerja sama dalam kelompok dengan peran yang jelas, mendokumentasikan kontribusi individu, dan menghasilkan laporan yang kohesif.
+1.3 Persyaratan Dasar (Berlaku untuk Semua Topik)
+Setiap kelompok wajib memenuhi persyaratan berikut agar penilaian tetap setara dan memastikan penguasaan fondasi modul SPF.
+
+Fondasi Repositori: Gunakan repositori learn_sdn. Controller yang diuji harus berbasis base_controller.py dan berjalan di atas Mininet dengan skrip topologi yang tersedia atau yang telah dimodifikasi.
+Perbandingan Algoritme: Setiap topik harus melibatkan perbandingan antar algoritme. Jika topik yang dipilih adalah komparasi, minimal bandingkan TIGA algoritme. Jika topik adalah implementasi baru, bandingkan dengan DUA algoritme dasar (misalnya Dijkstra dan Bellman-Ford).
+Variasi Topologi: Gunakan minimal DUA topologi yang berbeda untuk melihat bagaimana struktur jaringan memengaruhi performa algoritme. Modifikasi skrip topologi yang telah ada diizinkan.
+Emulasi di Mininet: Seluruh eksperimen wajib dijalankan dalam lingkungan emulasi Mininet. Hasil berupa data nyata dari switch dan host emulasi, bukan simulasi semata.
+Metrik yang Dilaporkan: Laporkan minimal TIGA metrik kuantitatif yang relevan, misalnya latensi end-to-end, throughput, jumlah hop/path, route convergence/flow completion time, atau lainnya.
+1.4 Penilaian
+Proyek ini dinilai berdasarkan seberapa baik mahasiswa memahami dan mengkomunikasikan hasil kerjanya, bukan seberapa canggih fitur yang dibangun. Kelompok yang mengevaluasi tiga algoritme secara cermat pada dua topologi, menyajikan tabel perbandingan yang rapi, dan menjelaskan perbedaan hasil dengan argumen yang logis akan mendapatkan nilai unggul. Proses berpikir yang jujur dan dokumentasi yang transparan sangat dihargai, termasuk ketika hasil yang diperoleh tidak sesuai ekspektasi awal.
+
+Bagian II: Tiga Topik Proyek
+Pilih SATU topik per kelompok. Semua topik dirancang untuk dapat diselesaikan dalam 4–6 minggu  dengan beban kerja yang seimbang.
+Topik 1: Analisis Perbandingan Algoritme Perutean SPF
+Tujuan: Memahami bagaimana berbagai algoritme SPF yang tersedia di repositori (Dijkstra, A*, Bellman-Ford, BFS, Floyd-Warshall) berperilaku pada topologi yang berbeda.
+
+Deskripsi: Pilih minimal tiga algoritme dari modul SPF repositori. Rancang minimal dua topologi yang merepresentasikan skenario nyata, misalnya topologi hierarkis tiga tingkat (core-distribution-access) untuk studi kasus kampus, topologi mesh untuk pusat data, atau topologi ring untuk jaringan metro. Jalankan eksperimen dengan beban lalu lintas yang identik pada setiap kombinasi algoritme-topologi.
+
+Deliverable Minimum:
+Dokumentasi dua topologi yang dirancang (skrip Python + diagram).
+Tabel perbandingan metrik untuk setiap algoritme pada setiap topologi.
+Analisis yang menjelaskan mengapa algoritme tertentu unggul atau tertinggal pada topologi tertentu.
+Kesimpulan yang merekomendasikan algoritme terbaik untuk masing-masing studi kasus.
+Topik 2: Implementasi dan Analisis Multipath SPF
+Tujuan: Mengevaluasi manfaat penggunaan banyak jalur sekaligus (multipath) dibandingkan jalur tunggal (single-path) dalam topologi yang memiliki jalur alternatif.
+
+Deskripsi: Gunakan controller dengan fungsi multipath yang telah tersedia di repositori. Rancang minimal dua topologi yang memiliki jalur setara atau hampir setara (misalnya topologi diamond atau topologi mesh parsial). Bandingkan performa multipath dengan algoritme yang berbeda  pada kondisi yang identik. Modifikasi logika distribusi aliran sederhana, seperti mengubah bobot hash atau membatasi jumlah jalur aktif, diperbolehkan untuk mengamati pengaruhnya terhadap keseimbangan beban.
+
+Deliverable Minimum:
+Topologi dengan beberapa jalur (multiple path) yang telah divalidasi.
+Tabel perbandingan throughput agregat, latensi, dan keseimbangan beban per jalur.
+Analisis mengenai kapan multipath memberikan keuntungan signifikan dan kapan tidak.
+Dokumentasi eksperimen multipath atau menggunakan skrip pengukuran sederhana.
+Topik 3: Implementasi Algoritme Perutean SPF/Multipath
+Tujuan: Mengimplementasikan satu algoritme perutean tambahan ke dalam kerangka kerja OSKen, lalu membandingkannya dengan algoritme dasar.
+
+Deskripsi: Kelompok tidak perlu merancang algoritme revolusioner. Pilih salah satu variasi sederhana berikut, atau usulkan sendiri dengan persetujuan dosen:
+Bounded Dijkstra – Dijkstra yang dibatasi jumlah hop maksimum.
+Round-Robin Path Selection – memilih jalur secara bergantian dari daftar jalur yang tersedia.
+Randomized Routing – memilih jalur secara acak dari himpunan jalur yang valid.
+Delay-Aware BFS – BFS yang diprioritaskan berdasarkan delay tautan (link).
+
+Implementasikan algoritme tersebut dengan memperluas base_controller.py.
+
+Deliverable Minimum:
+Kode controller yang berjalan di Mininet.
+Penjelasan pseudocode atau logika algoritme dalam laporan.
+Perbandingan dengan DUA algoritme dasar pada minimal SATU topologi.
+Analisis kelebihan dan kelemahan algoritme yang dikembangkan dibandingkan algoritme dasar.
+
+Bagian III: Tahapan, Deliverable, dan Panduan Kelompok
+3.1 Rencana Waktu (6 Minggu)
+Minggu
+Deliverable
+Detail
+Minggu 1
+Proposal
+Pilih topik, tetapkan tujuan, alokasikan peran, dan serahkan proposal satu halaman.
+Minggu 2
+Eksperimen Awal
+Jalankan eksperimen perdana, kumpulkan data awal, dan identifikasi kendala teknis.
+Minggu 3–5
+Evaluasi dan Analisis
+Lengkapi eksperimen, buat visualisasi data, dan susun analisis komparatif.
+Minggu 5
+Draf Laporan
+Susun draf lengkap laporan untuk tinjauan internal kelompok.
+Minggu 6
+Laporan Final dan Presentasi
+Perbaiki laporan, siapkan slide presentasi, dan lakukan presentasi kelompok.
+
+3.2 Struktur Kelompok (3–5 Anggota)
+Struktur dalam kelompok dapat beranggotakan minimal 3 mahasiswa sampai dengan maksimal 5 mahasiswa. Pembagian peran berikut dapat tumpang-tindih sesuai kebutuhan.
+Setiap mahasiswa wajib menyerahkan Pernyataan Kontribusi Individu sepanjang satu halaman sebagai lampiran laporan, yang menjelaskan tugas spesifik yang dikerjakan dalam kelompok.
+3.3 Ketentuan Teknis
+Controller harus menggunakan OSKen dan berbasis modul SPF yang tersedia di repositori.
+Emulator wajib menggunakan Mininet dengan skrip topologi berbasis Python.
+Bahasa pemrograman adalah Python 3. Penggunaan library tambahan diperkenankan seperti matplotlib dan numpy diperbolehkan untuk keperluan analisis dan visualisasi.
+Eksperimen harus dapat direproduksi pada laptop atau komputer standar.
+3.4 Daftar Periksa Pengumpulan
+Kode Sumber: Controller, skrip topologi, dan skrip pengukuran. Sertakan README yang memuat perintah untuk menjalankan eksperimen utama, serta wajib unggah ke sebuah repository. Apabila anda menggunakan repository yang tidak ingin dibuka secara publik, pastikan mengundang saya untuk dapat mengaksesnya.
+Laporan Akhir: Format laporan dalam PDF, 12–20 halaman tidak termasuk lampiran. Ikuti template pada Bagian IV.
+Presentasi: 15 menit presentasi kelompok ditambah 5 menit sesi tanya jawab pada minggu akhir.
+Pernyataan Kontribusi Individu: Satu halaman per mahasiswa, disertakan sebagai lampiran.
+
+Bagian IV: Template Laporan
+Gunakan struktur berikut sebagai kerangka wajib. Judul subbagian boleh disesuaikan, namun setiap bagian bernomor harus tetap ada.
+4.1 Halaman Judul
+Judul proyek dan topik yang dipilih (Topik 1, 2, atau 3).
+Nama mata kuliah, semester akademik, dan nama dosen pengampu.
+Daftar lengkap anggota kelompok beserta NIM masing-masing.
+4.2 Abstrak (200–300 kata)
+Satu paragraf yang mencakup: 
+(1) topik yang dipilih, 
+(2) algoritme atau topologi yang diuji, 
+(3) metode eksperimen secara singkat, dan 
+(4) dua temuan utama.
+4.3 Pendahuluan (1–2 halaman)
+4.3.1 Latar Belakang: Jelaskan mengapa perutean SPF penting dan mengapa topik yang dipilih relevan untuk dipelajari.
+4.3.2 Tujuan Proyek: Nyatakan secara spesifik apa yang ingin dicapai (maksimal 3 tujuan yang terukur).
+4.3.3 Ruang Lingkup: Jelaskan topologi, algoritme, dan metrik yang digunakan. Nyatakan pula batasan proyek.
+4.3.4 Sistematika Laporan: Uraikan secara singkat isi setiap bab berikutnya.
+4.4 Landasan Teori (2–3 halaman)
+4.4.1 Algoritme yang Diuji: Jelaskan cara kerja singkat setiap algoritme yang digunakan (Dijkstra, Bellman-Ford, A*, BFS, dan lain-lain). Sertakan kompleksitas waktu dan karakteristik utamanya.
+4.4.2 Topologi Jaringan: Jelaskan jenis-jenis topologi yang digunakan dan karakteristiknya (misalnya hierarkis, mesh, ring). Sertakan alasan pemilihan topologi tersebut.
+4.4.3 Metrik Evaluasi: Definisikan setiap metrik yang diukur dan jelaskan relevansinya terhadap tujuan proyek.
+4.5 Metodologi (2–3 halaman)
+4.5.1 Perancangan Eksperimen: Jelaskan skenario pengujian, kombinasi algoritme-topologi yang diuji, dan alat yang digunakan (iperf, ping, curl, dan sebagainya).
+4.5.2 Topologi: Lampirkan cuplikan skrip topologi yang digunakan dan jelaskan parameter tautan (bandwidth dan delay).
+4.5.3 Prosedur Pengumpulan Data: Jelaskan langkah-langkah pengujian dari awal hingga akhir sehingga pembaca dapat mereplikasi eksperimen.
+4.6 Implementasi (1–2 halaman)
+4.6.1 Integrasi dengan Repositori: Jelaskan bagaimana controller dan topologi dari repositori learn_sdn yang digunakan.
+4.6.2 Modifikasi yang Dilakukan: Jika ada perubahan kode, jelaskan bagian mana yang diubah dan alasannya. Sertakan cuplikan kode maksimal 30 baris, atau masukkan dalam lampiran.
+4.6.3 Kendala Selama Implementasi: Ceritakan secara jujur hambatan teknis yang dihadapi dan cara mengatasinya.
+4.7 Hasil dan Analisis (3–4 halaman)
+4.7.1 Presentasi Data: Sajikan hasil dalam bentuk tabel dan/atau grafik yang rapi. Pastikan setiap gambar memiliki keterangan yang jelas.
+4.7.2 Analisis Perbandingan: Bahas perbedaan hasil antar algoritme atau antar topologi. Hubungkan temuan dengan teori algoritmik dan karakteristik topologi yang digunakan.
+4.7.3 Pembahasan Temuan: Jelaskan temuan yang menarik atau tidak terduga. Jika ada hasil yang tidak sesuai hipotesis, analisis mengapa hal tersebut terjadi.
+4.8 Kesimpulan dan Saran (1 halaman)
+4.8.1 Kesimpulan: Ulangi tujuan proyek dan nyatakan apakah tujuan tersebut tercapai, disertai bukti singkat.
+4.8.2 Keterbatasan: Sebutkan batasan proyek secara spesifik.
+4.8.3 Saran: Usulkan 1–2 ide perbaikan atau pengembangan untuk proyek serupa di masa depan.
+4.9 Daftar Pustaka
+Gunakan format IEEE atau APA secara konsisten di seluruh dokumen. Minimal 5 referensi, mencakup literatur tentang algoritme perutean dan/atau SDN. Repositori learn_sdn dapat dicantumkan sebagai referensi teknis.
+4.10 Lampiran
+Lampiran A: Tabel data lengkap (jika terlalu besar untuk dimuat di bab utama).
+Lampiran B: Repositori kode lengkap (berikan penjelasan lengkap).
+Lampiran C: Pernyataan Kontribusi Individu (satu halaman per anggota kelompok).
+
+Bagian V: Rubrik Penilaian
+Rubrik terdiri dari lima dimensi dengan empat tingkat pencapaian. Total nilai adalah 100 poin. Tingkat pencapaian diberi nama yang mudah dipahami: Perlu Pengembangan, Memuaskan, Unggul, dan Istimewa.
+5.1 Bobot Rubrik
+Dimensi
+Bobot
+Dasar Penilaian
+Implementasi Teknis
+25 poin
+Apakah kode berjalan? Apakah eksperimen berhasil dijalankan?
+Perancangan Eksperimen dan Data
+25 poin
+Apakah eksperimen terstruktur, dapat diulang, dan data lengkap?
+Analisis dan Interpretasi
+25 poin
+Apakah hasil dianalisis dengan argumen yang logis dan jujur?
+Kualitas Laporan
+15 poin
+Apakah laporan jelas, lengkap, dan terstruktur dengan baik?
+Kolaborasi dan Proses
+10 poin
+Apakah kontribusi transparan dan tahapan diselesaikan tepat waktu?
+
+5.2 Rincian Rubrik
+Rubrik 1: Implementasi Teknis (25 poin)
+Perlu Pengembangan (0–12)
+Kode tidak berjalan, atau berjalan namun sering gagal. Eksperimen tidak lengkap. Tidak ada integrasi dengan repositori dasar.
+Memuaskan (13–18)
+Kode controller berjalan end-to-end di Mininet. Eksperimen utama berhasil dijalankan meskipun terdapat bug kecil. Modifikasi atau komparasi telah dilakukan sesuai topik.
+Unggul (19–22)
+Implementasi berjalan stabil. Dokumentasi kode cukup jelas. Jika ada modifikasi, terintegrasi dengan baik dengan base_controller.py. Eksperimen dapat direproduksi melalui README.
+Istimewa (23–25)
+Implementasi sangat rapi dengan penanganan kesalahan dasar dan dokumentasi yang memadai. Algoritme atau modifikasi mudah dipahami. Eksperimen berjalan konsisten tanpa kendala berarti.
+
+Rubrik 2: Perancangan Eksperimen dan Data (25 poin)
+Perlu Pengembangan (0–12)
+Eksperimen tidak terstruktur atau tidak dapat direproduksi. Kurangnya variasi topologi atau algoritme. Data yang dikumpulkan tidak lengkap atau tidak konsisten.
+Memuaskan (13–18)
+Eksperimen telah dirancang dengan variasi topologi dan/atau algoritme sesuai persyaratan. Data dikumpulkan secara sistematis meskipun analisis masih dangkal.
+Unggul (19–22)
+Matriks eksperimen lengkap dengan minimal dua topologi dan perbandingan antar algoritme. Data tersaji dalam tabel yang rapi. Proses pengumpulan jelas dan dapat direplikasi.
+Istimewa (23–25)
+Perancangan eksperimen sangat sistematis, mencakup variasi parameter yang terencana, misalnya mengubah beban lalu lintas atau bandwidth tautan. Data lengkap dengan replikasi atau pengulangan pengujian untuk memastikan konsistensi hasil.
+
+Rubrik 3: Analisis dan Interpretasi (25 poin)
+Perlu Pengembangan (0–12)
+Hasil disajikan sebagai tabel atau grafik tanpa interpretasi. Tidak ada penjelasan mengapa satu algoritme lebih baik dari yang lain. Kesimpulan tidak didukung oleh data.
+Memuaskan (13–18)
+Hasil diinterpretasikan dalam bahasa yang mudah dipahami. Ada upaya menjelaskan perbedaan hasil, meskipun argumen masih bersifat umum dan belum mendalam.
+Unggul (19–22)
+Analisis menghubungkan hasil kuantitatif dengan karakteristik algoritme dan topologi. Perbedaan antar algoritme dijelaskan secara logis. Keterbatasan diakui secara jujur.
+Istimewa (23–25)
+Analisis mengungkap wawasan yang tidak terlihat secara langsung, misalnya dampak jumlah switch perantara, bottleneck tautan, atau urutan penjelajahan BFS vs. Dijkstra. Pembahasan keterbatasan sangat spesifik dan disertai saran yang konkret.
+
+Rubrik 4: Kualitas Laporan dan Komunikasi (15 poin)
+Perlu Pengembangan (0–6)
+Organisasi laporan buruk, ada bagian yang hilang, atau penempelan kode berlebihan. Gambar atau tabel tidak berketerangan. Laporan sulit dipahami.
+Memuaskan (7–10)
+Semua bagian wajib hadir. Tulisan cukup jelas. Tabel dan gambar dapat dibaca dengan keterangan dasar. Beberapa bagian transisinya masih kasar.
+Unggul (11–13)
+Laporan terstruktur dengan baik, narasi kohesif, tabel dan grafik rapi. Referensi silang antarbab akurat. Abstrak mencerminkan isi laporan dengan tepat.
+Istimewa (14–15)
+Laporan sangat profesional, mudah dibaca, dengan visualisasi yang mendukung pemahaman. Argumen logis dari awal hingga akhir. Dapat dijadikan referensi bagi kelompok lain.
+
+Rubrik 5: Kolaborasi dan Proses (10 poin)
+Perlu Pengembangan (0–4)
+Tidak ada Pernyataan Kontribusi Individu. Kontribusi tidak jelas atau sangat tidak seimbang. Banyak tahapan yang terlewat.
+Memuaskan (5–6)
+Pernyataan kontribusi hadir. Kelompok memenuhi sebagian besar tahapan. Ada bukti kerja sama, misalnya log commit git atau dokumen bersama.
+Unggul (7–8)
+Kontribusi setiap anggota jelas dan proporsional. Tahapan terpenuhi secara konsisten. Kelompok menangani masalah atau konflik dengan cara yang dewasa.
+Istimewa (9–10)
+Pernyataan kontribusi sangat rinci dan disertai refleksi pembelajaran per anggota. Kolaborasi terdokumentasi dengan baik melalui git atau dokumen bersama. Kelompok proaktif mencari masukan kepada dosen.
+
+5.3 Catatan Penilaian
+Keterlambatan pengumpulan: Dikenai penalti 10% per hari, maksimal 3 hari keterlambatan.
+Integritas akademik: Kode dan tulisan harus orisinal atau mencantumkan atribusi yang jelas. Penggunaan alat bantu kecerdasan buatan diizinkan untuk penyusunan draf, namun mahasiswa harus memahami dan mampu menjelaskan setiap bagian laporan serta kode yang dikumpulkan.
+Evaluasi rekan sejawat: Dalam kasus ketidakseimbangan kontribusi yang signifikan, nilai individu dapat disesuaikan hingga ±15% dari nilai kelompok.
+Permintaan penilaian ulang: Diajukan secara tertulis dalam 5 hari setelah pembagian nilai, disertai bukti yang relevan.
+
+Bangun. Ukur. Pahami.
+
+Selamat mengerjakan proyek akhir Anda.
+Referensi: github.com/abazh/learn_sdn
