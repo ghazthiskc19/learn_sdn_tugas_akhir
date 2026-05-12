@@ -1,0 +1,5 @@
+test,hop_count
+progressive_h1_h2,4
+progressive_h1_h5,5
+reroute_baseline,2
+reroute_core_failure,3

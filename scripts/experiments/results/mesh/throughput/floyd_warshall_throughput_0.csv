@@ -1,0 +1,5 @@
+scenario,throughput_mbps,retransmits
+baseline,838.38,56
+multiflow,113.37,29
+failover,98.33,45
+mss_compare,735.74,7
