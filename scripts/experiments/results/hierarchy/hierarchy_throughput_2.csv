@@ -1,0 +1,81 @@
+algorithm,controller,second,bits_per_second,path,hop_count,total_bandwidth_mbps
+bfs,bfs_osken_controller.py,1,40886611.88296897,Access1 -> Dist1 -> Core1 -> Core2 -> Dist3 -> Access4,5,0.0
+bfs,bfs_osken_controller.py,2,52433519.17473995,Access1 -> Dist1 -> Core1 -> Core2 -> Dist3 -> Access4,5,0.0
+bfs,bfs_osken_controller.py,3,41941070.09252352,Access1 -> Dist1 -> Core1 -> Core2 -> Dist3 -> Access4,5,0.0
+bfs,bfs_osken_controller.py,4,52429534.3852866,Access1 -> Dist1 -> Core1 -> Core2 -> Dist3 -> Access4,5,0.0
+bfs,bfs_osken_controller.py,5,41938845.41952765,Access1 -> Dist1 -> Core1 -> Core2 -> Dist3 -> Access4,5,0.0
+bfs,bfs_osken_controller.py,6,52434147.4203489,Access1 -> Dist1 -> Core1 -> Core2 -> Dist3 -> Access4,5,0.0
+bfs,bfs_osken_controller.py,7,41938175.56422901,Access1 -> Dist1 -> Core1 -> Core2 -> Dist3 -> Access4,5,0.0
+bfs,bfs_osken_controller.py,8,52437032.54249793,Access1 -> Dist1 -> Core1 -> Core2 -> Dist3 -> Access4,5,0.0
+bfs,bfs_osken_controller.py,9,52428750.00004768,Access1 -> Dist1 -> Core1 -> Core2 -> Dist3 -> Access4,5,0.0
+bfs,bfs_osken_controller.py,10,41942790.0014901,Access1 -> Dist1 -> Core1 -> Core2 -> Dist3 -> Access4,5,0.0
+bfs,bfs_osken_controller.py,11,52428225.0063061,Access1 -> Dist1 -> Core1 -> Core2 -> Dist3 -> Access4,5,0.0
+bfs,bfs_osken_controller.py,12,41943082.500043064,Access1 -> Dist1 -> Core1 -> Core2 -> Dist3 -> Access4,5,0.0
+bfs,bfs_osken_controller.py,13,52428431.25259353,Access1 -> Dist1 -> Core1 -> Core2 -> Dist3 -> Access4,5,0.0
+bfs,bfs_osken_controller.py,14,41938635.46257942,Access1 -> Dist1 -> Core1 -> Core2 -> Dist3 -> Access4,5,0.0
+bfs,bfs_osken_controller.py,15,52432259.60327273,Access1 -> Dist1 -> Core1 -> Core2 -> Dist3 -> Access4,5,0.0
+bfs,bfs_osken_controller.py,16,52432940.95203647,Access1 -> Dist1 -> Core1 -> Core2 -> Dist3 -> Access4,5,0.0
+bfs,bfs_osken_controller.py,17,41939055.3785781,Access1 -> Dist1 -> Core1 -> Core2 -> Dist3 -> Access4,5,0.0
+bfs,bfs_osken_controller.py,18,52432940.95203647,Access1 -> Dist1 -> Core1 -> Core2 -> Dist3 -> Access4,5,0.0
+bfs,bfs_osken_controller.py,19,41940105.20536476,Access1 -> Dist1 -> Core1 -> Core2 -> Dist3 -> Access4,5,0.0
+bfs,bfs_osken_controller.py,20,52429218.7533446,Access1 -> Dist1 -> Core1 -> Core2 -> Dist3 -> Access4,5,0.0
+astar,astar_osken_controller.py,1,50327118.40767696,Access1 -> Dist2 -> Dist1 -> Core1 -> Core2 -> Dist3 -> Access4,6,0.0
+astar,astar_osken_controller.py,2,94373730.0378521,Access1 -> Dist2 -> Dist1 -> Core1 -> Core2 -> Dist3 -> Access4,6,0.0
+astar,astar_osken_controller.py,3,94371457.5015503,Access1 -> Dist2 -> Dist1 -> Core1 -> Core2 -> Dist3 -> Access4,6,0.0
+astar,astar_osken_controller.py,4,94370422.52129106,Access1 -> Dist2 -> Dist1 -> Core1 -> Core2 -> Dist3 -> Access4,6,0.0
+astar,astar_osken_controller.py,5,94371648.7503876,Access1 -> Dist2 -> Dist1 -> Core1 -> Core2 -> Dist3 -> Access4,6,0.0
+astar,astar_osken_controller.py,6,94367126.4854339,Access1 -> Dist2 -> Dist1 -> Core1 -> Core2 -> Dist3 -> Access4,6,0.0
+astar,astar_osken_controller.py,7,94374956.352905,Access1 -> Dist2 -> Dist1 -> Core1 -> Core2 -> Dist3 -> Access4,6,0.0
+astar,astar_osken_controller.py,8,104865675.62189719,Access1 -> Dist2 -> Dist1 -> Core1 -> Core2 -> Dist3 -> Access4,6,0.0
+astar,astar_osken_controller.py,9,94367880.16616124,Access1 -> Dist2 -> Dist1 -> Core1 -> Core2 -> Dist3 -> Access4,6,0.0
+astar,astar_osken_controller.py,10,94370332.5240805,Access1 -> Dist2 -> Dist1 -> Core1 -> Core2 -> Dist3 -> Access4,6,0.0
+astar,astar_osken_controller.py,11,94371457.5015503,Access1 -> Dist2 -> Dist1 -> Core1 -> Core2 -> Dist3 -> Access4,6,0.0
+astar,astar_osken_controller.py,12,94371457.5015503,Access1 -> Dist2 -> Dist1 -> Core1 -> Core2 -> Dist3 -> Access4,6,0.0
+astar,astar_osken_controller.py,13,94369578.80418067,Access1 -> Dist2 -> Dist1 -> Core1 -> Core2 -> Dist3 -> Access4,6,0.0
+astar,astar_osken_controller.py,14,94371367.5023657,Access1 -> Dist2 -> Dist1 -> Core1 -> Core2 -> Dist3 -> Access4,6,0.0
+astar,astar_osken_controller.py,15,94379108.0597075,Access1 -> Dist2 -> Dist1 -> Core1 -> Core2 -> Dist3 -> Access4,6,0.0
+astar,astar_osken_controller.py,16,104851512.85338883,Access1 -> Dist2 -> Dist1 -> Core1 -> Core2 -> Dist3 -> Access4,6,0.0
+astar,astar_osken_controller.py,17,94376182.6998284,Access1 -> Dist2 -> Dist1 -> Core1 -> Core2 -> Dist3 -> Access4,6,0.0
+astar,astar_osken_controller.py,18,94370703.76368044,Access1 -> Dist2 -> Dist1 -> Core1 -> Core2 -> Dist3 -> Access4,6,0.0
+astar,astar_osken_controller.py,19,94373915.67065254,Access1 -> Dist2 -> Dist1 -> Core1 -> Core2 -> Dist3 -> Access4,6,0.0
+astar,astar_osken_controller.py,20,94367306.467797,Access1 -> Dist2 -> Dist1 -> Core1 -> Core2 -> Dist3 -> Access4,6,0.0
+bellman-ford,bellman_ford_osken_controller.py,1,42983791.549304985,Access1 -> Dist2 -> Dist1 -> Core1 -> Core2 -> Dist3 -> Access4,6,0.0
+bellman-ford,bellman_ford_osken_controller.py,2,104866306.9729336,Access1 -> Dist2 -> Dist1 -> Core1 -> Core2 -> Dist3 -> Access4,6,0.0
+bellman-ford,bellman_ford_osken_controller.py,3,94373443.15223327,Access1 -> Dist2 -> Dist1 -> Core1 -> Core2 -> Dist3 -> Access4,6,0.0
+bellman-ford,bellman_ford_osken_controller.py,4,94370231.2774238,Access1 -> Dist2 -> Dist1 -> Core1 -> Core2 -> Dist3 -> Access4,6,0.0
+bellman-ford,bellman_ford_osken_controller.py,5,94375333.254301,Access1 -> Dist2 -> Dist1 -> Core1 -> Core2 -> Dist3 -> Access4,6,0.0
+bellman-ford,bellman_ford_osken_controller.py,6,94368633.8589275,Access1 -> Dist2 -> Dist1 -> Core1 -> Core2 -> Dist3 -> Access4,6,0.0
+bellman-ford,bellman_ford_osken_controller.py,7,94368442.6223097,Access1 -> Dist2 -> Dist1 -> Core1 -> Core2 -> Dist3 -> Access4,6,0.0
+bellman-ford,bellman_ford_osken_controller.py,8,94379957.57318842,Access1 -> Dist2 -> Dist1 -> Core1 -> Core2 -> Dist3 -> Access4,6,0.0
+bellman-ford,bellman_ford_osken_controller.py,9,94363436.99828175,Access1 -> Dist2 -> Dist1 -> Core1 -> Core2 -> Dist3 -> Access4,6,0.0
+bellman-ford,bellman_ford_osken_controller.py,10,104862212.70290463,Access1 -> Dist2 -> Dist1 -> Core1 -> Core2 -> Dist3 -> Access4,6,0.0
+bellman-ford,bellman_ford_osken_controller.py,11,94370141.28057797,Access1 -> Dist2 -> Dist1 -> Core1 -> Core2 -> Dist3 -> Access4,6,0.0
+bellman-ford,bellman_ford_osken_controller.py,12,94372498.12958963,Access1 -> Dist2 -> Dist1 -> Core1 -> Core2 -> Dist3 -> Access4,6,0.0
+bellman-ford,bellman_ford_osken_controller.py,13,94372880.63647495,Access1 -> Dist2 -> Dist1 -> Core1 -> Core2 -> Dist3 -> Access4,6,0.0
+bellman-ford,bellman_ford_osken_controller.py,14,94373730.0378521,Access1 -> Dist2 -> Dist1 -> Core1 -> Core2 -> Dist3 -> Access4,6,0.0
+bellman-ford,bellman_ford_osken_controller.py,15,94372312.50236572,Access1 -> Dist2 -> Dist1 -> Core1 -> Core2 -> Dist3 -> Access4,6,0.0
+bellman-ford,bellman_ford_osken_controller.py,16,94365135.47634794,Access1 -> Dist2 -> Dist1 -> Core1 -> Core2 -> Dist3 -> Access4,6,0.0
+bellman-ford,bellman_ford_osken_controller.py,17,94371176.25466835,Access1 -> Dist2 -> Dist1 -> Core1 -> Core2 -> Dist3 -> Access4,6,0.0
+bellman-ford,bellman_ford_osken_controller.py,18,104860743.84425603,Access1 -> Dist2 -> Dist1 -> Core1 -> Core2 -> Dist3 -> Access4,6,0.0
+bellman-ford,bellman_ford_osken_controller.py,19,94371558.7508382,Access1 -> Dist2 -> Dist1 -> Core1 -> Core2 -> Dist3 -> Access4,6,0.0
+bellman-ford,bellman_ford_osken_controller.py,20,94366080.35154104,Access1 -> Dist2 -> Dist1 -> Core1 -> Core2 -> Dist3 -> Access4,6,0.0
+dijkstra,dijkstra_osken_controller.py,1,48231460.19108142,Access1 -> Dist2 -> Dist1 -> Core1 -> Core2 -> Dist3 -> Access4,6,0.0
+dijkstra,dijkstra_osken_controller.py,2,94370231.2774238,Access1 -> Dist2 -> Dist1 -> Core1 -> Core2 -> Dist3 -> Access4,6,0.0
+dijkstra,dijkstra_osken_controller.py,3,94369196.32406043,Access1 -> Dist2 -> Dist1 -> Core1 -> Core2 -> Dist3 -> Access4,6,0.0
+dijkstra,dijkstra_osken_controller.py,4,94368723.8528982,Access1 -> Dist2 -> Dist1 -> Core1 -> Core2 -> Dist3 -> Access4,6,0.0
+dijkstra,dijkstra_osken_controller.py,5,94381369.7122176,Access1 -> Dist2 -> Dist1 -> Core1 -> Core2 -> Dist3 -> Access4,6,0.0
+dijkstra,dijkstra_osken_controller.py,6,104852150.28325039,Access1 -> Dist2 -> Dist1 -> Core1 -> Core2 -> Dist3 -> Access4,6,0.0
+dijkstra,dijkstra_osken_controller.py,7,94371277.50335275,Access1 -> Dist2 -> Dist1 -> Core1 -> Core2 -> Dist3 -> Access4,6,0.0
+dijkstra,dijkstra_osken_controller.py,8,94373066.26593387,Access1 -> Dist2 -> Dist1 -> Core1 -> Core2 -> Dist3 -> Access4,6,0.0
+dijkstra,dijkstra_osken_controller.py,9,94370703.76368044,Access1 -> Dist2 -> Dist1 -> Core1 -> Core2 -> Dist3 -> Access4,6,0.0
+dijkstra,dijkstra_osken_controller.py,10,94372031.2503876,Access1 -> Dist2 -> Dist1 -> Core1 -> Core2 -> Dist3 -> Access4,6,0.0
+dijkstra,dijkstra_osken_controller.py,11,94367598.94060127,Access1 -> Dist2 -> Dist1 -> Core1 -> Core2 -> Dist3 -> Access4,6,0.0
+dijkstra,dijkstra_osken_controller.py,12,94377313.44243404,Access1 -> Dist2 -> Dist1 -> Core1 -> Core2 -> Dist3 -> Access4,6,0.0
+dijkstra,dijkstra_osken_controller.py,13,94375237.6223185,Access1 -> Dist2 -> Dist1 -> Core1 -> Core2 -> Dist3 -> Access4,6,0.0
+dijkstra,dijkstra_osken_controller.py,14,104853400.16822141,Access1 -> Dist2 -> Dist1 -> Core1 -> Core2 -> Dist3 -> Access4,6,0.0
+dijkstra,dijkstra_osken_controller.py,15,94368532.61591564,Access1 -> Dist2 -> Dist1 -> Core1 -> Core2 -> Dist3 -> Access4,6,0.0
+dijkstra,dijkstra_osken_controller.py,16,94374011.29995595,Access1 -> Dist2 -> Dist1 -> Core1 -> Core2 -> Dist3 -> Access4,6,0.0
+dijkstra,dijkstra_osken_controller.py,17,94373161.8935159,Access1 -> Dist2 -> Dist1 -> Core1 -> Core2 -> Dist3 -> Access4,6,0.0
+dijkstra,dijkstra_osken_controller.py,18,94370332.5240805,Access1 -> Dist2 -> Dist1 -> Core1 -> Core2 -> Dist3 -> Access4,6,0.0
+dijkstra,dijkstra_osken_controller.py,19,94374483.82406457,Access1 -> Dist2 -> Dist1 -> Core1 -> Core2 -> Dist3 -> Access4,6,0.0
+dijkstra,dijkstra_osken_controller.py,20,94368825.0963204,Access1 -> Dist2 -> Dist1 -> Core1 -> Core2 -> Dist3 -> Access4,6,0.0

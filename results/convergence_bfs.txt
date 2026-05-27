@@ -1,0 +1,290 @@
+[PORT_STATUS] t=15687.912118790 s1 port=3 reason=modify
+[CONVERGENCE-START] id=1 t1=15687.912323065
+[PORT_STATUS] t=15687.913695621 s2 port=3 reason=modify
+[PORT_STATUS] t=15687.914104305 s2 port=3 reason=modify
+[CONVERGENCE-START-SKIP] id=1 duplicate port-status s2 port=3 reason=modify
+[PORT_STATUS] t=15688.297259407 s1 port=3 reason=modify
+[PORT_STATUS] t=15688.298391496 s2 port=3 reason=modify
+[TOPO-CHANGE] (LLDP topology event) switches=11 links=34  delta +2 -0
+[TOPO-UP]   [(1, 2), (2, 1)]
+[TOPO-REFRESH] flushing 12 flows, rebuilding routes
+[TREE-DONE] root=s1 tree_edges=11 reachable=11/11
+[SPF-DONE] BFS s16->s17 reachable=11/11
+[PATH-COMPUTED] s16->s17: 2 hop(s) path=s16 -> s4 -> s17
+[FLOW-INSTALL] 00:00:00:00:00:01 → 00:00:00:00:00:02: s16 -> s4 -> s17
+[FLOW_MOD] t=15688.951142320 dpid=s16 action=delete-strict src=00:00:00:00:00:01 dst=00:00:00:00:00:02 in_port=1 out_port=3
+[FLOW_MOD] t=15688.951482708 dpid=s16 action=add src=00:00:00:00:00:01 dst=00:00:00:00:00:02 in_port=1 out_port=3
+[CONVERGENCE-FLOWMOD] id=1 t2=15688.951846004
+[FLOW_MOD] t=15688.952295538 dpid=s4 action=delete-strict src=00:00:00:00:00:01 dst=00:00:00:00:00:02 in_port=1 out_port=2
+[FLOW_MOD] t=15688.952652482 dpid=s4 action=add src=00:00:00:00:00:01 dst=00:00:00:00:00:02 in_port=1 out_port=2
+[FLOW_MOD] t=15688.953110249 dpid=s17 action=delete-strict src=00:00:00:00:00:01 dst=00:00:00:00:00:02 in_port=3 out_port=1
+[FLOW_MOD] t=15688.953469811 dpid=s17 action=add src=00:00:00:00:00:01 dst=00:00:00:00:00:02 in_port=3 out_port=1
+[FLOW_MOD] t=15688.953935788 dpid=s17 action=delete-strict src=00:00:00:00:00:02 dst=00:00:00:00:00:01 in_port=1 out_port=3
+[FLOW_MOD] t=15688.954257647 dpid=s17 action=add src=00:00:00:00:00:02 dst=00:00:00:00:00:01 in_port=1 out_port=3
+[FLOW_MOD] t=15688.954649004 dpid=s4 action=delete-strict src=00:00:00:00:00:02 dst=00:00:00:00:00:01 in_port=2 out_port=1
+[FLOW_MOD] t=15688.955068343 dpid=s4 action=add src=00:00:00:00:00:02 dst=00:00:00:00:00:01 in_port=2 out_port=1
+[FLOW_MOD] t=15688.955699529 dpid=s16 action=delete-strict src=00:00:00:00:00:02 dst=00:00:00:00:00:01 in_port=3 out_port=1
+[FLOW_MOD] t=15688.956170807 dpid=s16 action=add src=00:00:00:00:00:02 dst=00:00:00:00:00:01 in_port=3 out_port=1
+[SPF-DONE] BFS s16->s18 reachable=11/11
+[PATH-COMPUTED] s16->s18: 5 hop(s) path=s16 -> s4 -> s1 -> s2 -> s6 -> s18
+[FLOW-INSTALL] 00:00:00:00:00:01 → 00:00:00:00:00:03: s16 -> s4 -> s1 -> s2 -> s6 -> s18
+[FLOW_MOD] t=15688.957763902 dpid=s16 action=delete-strict src=00:00:00:00:00:01 dst=00:00:00:00:00:03 in_port=1 out_port=3
+[FLOW_MOD] t=15688.958182316 dpid=s16 action=add src=00:00:00:00:00:01 dst=00:00:00:00:00:03 in_port=1 out_port=3
+[FLOW_MOD] t=15688.958730188 dpid=s4 action=delete-strict src=00:00:00:00:00:01 dst=00:00:00:00:00:03 in_port=1 out_port=4
+[FLOW_MOD] t=15688.959144978 dpid=s4 action=add src=00:00:00:00:00:01 dst=00:00:00:00:00:03 in_port=1 out_port=4
+[FLOW_MOD] t=15688.959680368 dpid=s1 action=delete-strict src=00:00:00:00:00:01 dst=00:00:00:00:00:03 in_port=1 out_port=3
+[FLOW_MOD] t=15688.960161522 dpid=s1 action=add src=00:00:00:00:00:01 dst=00:00:00:00:00:03 in_port=1 out_port=3
+[FLOW_MOD] t=15688.960707089 dpid=s2 action=delete-strict src=00:00:00:00:00:01 dst=00:00:00:00:00:03 in_port=3 out_port=1
+[FLOW_MOD] t=15688.961284792 dpid=s2 action=add src=00:00:00:00:00:01 dst=00:00:00:00:00:03 in_port=3 out_port=1
+[FLOW_MOD] t=15688.961855357 dpid=s6 action=delete-strict src=00:00:00:00:00:01 dst=00:00:00:00:00:03 in_port=4 out_port=1
+[FLOW_MOD] t=15688.962256122 dpid=s6 action=add src=00:00:00:00:00:01 dst=00:00:00:00:00:03 in_port=4 out_port=1
+[FLOW_MOD] t=15688.962777279 dpid=s18 action=delete-strict src=00:00:00:00:00:01 dst=00:00:00:00:00:03 in_port=3 out_port=1
+[FLOW_MOD] t=15688.963142022 dpid=s18 action=add src=00:00:00:00:00:01 dst=00:00:00:00:00:03 in_port=3 out_port=1
+[FLOW_MOD] t=15688.963552761 dpid=s18 action=delete-strict src=00:00:00:00:00:03 dst=00:00:00:00:00:01 in_port=1 out_port=3
+[FLOW_MOD] t=15688.963892256 dpid=s18 action=add src=00:00:00:00:00:03 dst=00:00:00:00:00:01 in_port=1 out_port=3
+[FLOW_MOD] t=15688.964290568 dpid=s6 action=delete-strict src=00:00:00:00:00:03 dst=00:00:00:00:00:01 in_port=1 out_port=4
+[FLOW_MOD] t=15688.964587550 dpid=s6 action=add src=00:00:00:00:00:03 dst=00:00:00:00:00:01 in_port=1 out_port=4
+[FLOW_MOD] t=15688.965028604 dpid=s2 action=delete-strict src=00:00:00:00:00:03 dst=00:00:00:00:00:01 in_port=1 out_port=3
+[FLOW_MOD] t=15688.965519715 dpid=s2 action=add src=00:00:00:00:00:03 dst=00:00:00:00:00:01 in_port=1 out_port=3
+[FLOW_MOD] t=15688.965858359 dpid=s1 action=delete-strict src=00:00:00:00:00:03 dst=00:00:00:00:00:01 in_port=3 out_port=1
+[FLOW_MOD] t=15688.966134143 dpid=s1 action=add src=00:00:00:00:00:03 dst=00:00:00:00:00:01 in_port=3 out_port=1
+[FLOW_MOD] t=15688.966462472 dpid=s4 action=delete-strict src=00:00:00:00:00:03 dst=00:00:00:00:00:01 in_port=4 out_port=1
+[FLOW_MOD] t=15688.966969873 dpid=s4 action=add src=00:00:00:00:00:03 dst=00:00:00:00:00:01 in_port=4 out_port=1
+[FLOW_MOD] t=15688.967295876 dpid=s16 action=delete-strict src=00:00:00:00:00:03 dst=00:00:00:00:00:01 in_port=3 out_port=1
+[FLOW_MOD] t=15688.967535809 dpid=s16 action=add src=00:00:00:00:00:03 dst=00:00:00:00:00:01 in_port=3 out_port=1
+[SPF-DONE] BFS s16->s19 reachable=11/11
+[PATH-COMPUTED] s16->s19: 5 hop(s) path=s16 -> s4 -> s1 -> s2 -> s6 -> s19
+[FLOW-INSTALL] 00:00:00:00:00:01 → 00:00:00:00:00:04: s16 -> s4 -> s1 -> s2 -> s6 -> s19
+[FLOW_MOD] t=15688.968590062 dpid=s16 action=delete-strict src=00:00:00:00:00:01 dst=00:00:00:00:00:04 in_port=1 out_port=3
+[FLOW_MOD] t=15688.968880379 dpid=s16 action=add src=00:00:00:00:00:01 dst=00:00:00:00:00:04 in_port=1 out_port=3
+[FLOW_MOD] t=15688.969274975 dpid=s4 action=delete-strict src=00:00:00:00:00:01 dst=00:00:00:00:00:04 in_port=1 out_port=4
+[FLOW_MOD] t=15688.969547429 dpid=s4 action=add src=00:00:00:00:00:01 dst=00:00:00:00:00:04 in_port=1 out_port=4
+[FLOW_MOD] t=15688.969863352 dpid=s1 action=delete-strict src=00:00:00:00:00:01 dst=00:00:00:00:00:04 in_port=1 out_port=3
+[FLOW_MOD] t=15688.970173501 dpid=s1 action=add src=00:00:00:00:00:01 dst=00:00:00:00:00:04 in_port=1 out_port=3
+[FLOW_MOD] t=15688.970504219 dpid=s2 action=delete-strict src=00:00:00:00:00:01 dst=00:00:00:00:00:04 in_port=3 out_port=1
+[FLOW_MOD] t=15688.970787639 dpid=s2 action=add src=00:00:00:00:00:01 dst=00:00:00:00:00:04 in_port=3 out_port=1
+[FLOW_MOD] t=15688.971163363 dpid=s6 action=delete-strict src=00:00:00:00:00:01 dst=00:00:00:00:00:04 in_port=4 out_port=2
+[FLOW_MOD] t=15688.971421631 dpid=s6 action=add src=00:00:00:00:00:01 dst=00:00:00:00:00:04 in_port=4 out_port=2
+[FLOW_MOD] t=15688.971737211 dpid=s19 action=delete-strict src=00:00:00:00:00:01 dst=00:00:00:00:00:04 in_port=3 out_port=1
+[FLOW_MOD] t=15688.971968456 dpid=s19 action=add src=00:00:00:00:00:01 dst=00:00:00:00:00:04 in_port=3 out_port=1
+[FLOW_MOD] t=15688.972338347 dpid=s19 action=delete-strict src=00:00:00:00:00:04 dst=00:00:00:00:00:01 in_port=1 out_port=3
+[FLOW_MOD] t=15688.972610480 dpid=s19 action=add src=00:00:00:00:00:04 dst=00:00:00:00:00:01 in_port=1 out_port=3
+[FLOW_MOD] t=15688.973000829 dpid=s6 action=delete-strict src=00:00:00:00:00:04 dst=00:00:00:00:00:01 in_port=2 out_port=4
+[FLOW_MOD] t=15688.973296074 dpid=s6 action=add src=00:00:00:00:00:04 dst=00:00:00:00:00:01 in_port=2 out_port=4
+[FLOW_MOD] t=15688.973606809 dpid=s2 action=delete-strict src=00:00:00:00:00:04 dst=00:00:00:00:00:01 in_port=1 out_port=3
+[FLOW_MOD] t=15688.973815886 dpid=s2 action=add src=00:00:00:00:00:04 dst=00:00:00:00:00:01 in_port=1 out_port=3
+[FLOW_MOD] t=15688.974090915 dpid=s1 action=delete-strict src=00:00:00:00:00:04 dst=00:00:00:00:00:01 in_port=3 out_port=1
+[FLOW_MOD] t=15688.974302210 dpid=s1 action=add src=00:00:00:00:00:04 dst=00:00:00:00:00:01 in_port=3 out_port=1
+[FLOW_MOD] t=15688.974606326 dpid=s4 action=delete-strict src=00:00:00:00:00:04 dst=00:00:00:00:00:01 in_port=4 out_port=1
+[FLOW_MOD] t=15688.974835545 dpid=s4 action=add src=00:00:00:00:00:04 dst=00:00:00:00:00:01 in_port=4 out_port=1
+[FLOW_MOD] t=15688.975140945 dpid=s16 action=delete-strict src=00:00:00:00:00:04 dst=00:00:00:00:00:01 in_port=3 out_port=1
+[FLOW_MOD] t=15688.975403290 dpid=s16 action=add src=00:00:00:00:00:04 dst=00:00:00:00:00:01 in_port=3 out_port=1
+[SPF-DONE] BFS s17->s16 reachable=11/11
+[PATH-COMPUTED] s17->s16: 2 hop(s) path=s17 -> s4 -> s16
+[FLOW-INSTALL] 00:00:00:00:00:02 → 00:00:00:00:00:01: s17 -> s4 -> s16
+[FLOW_MOD] t=15688.976609511 dpid=s17 action=delete-strict src=00:00:00:00:00:02 dst=00:00:00:00:00:01 in_port=1 out_port=3
+[FLOW_MOD] t=15688.976868231 dpid=s17 action=add src=00:00:00:00:00:02 dst=00:00:00:00:00:01 in_port=1 out_port=3
+[FLOW_MOD] t=15688.977176262 dpid=s4 action=delete-strict src=00:00:00:00:00:02 dst=00:00:00:00:00:01 in_port=2 out_port=1
+[FLOW_MOD] t=15688.977424086 dpid=s4 action=add src=00:00:00:00:00:02 dst=00:00:00:00:00:01 in_port=2 out_port=1
+[FLOW_MOD] t=15688.977760466 dpid=s16 action=delete-strict src=00:00:00:00:00:02 dst=00:00:00:00:00:01 in_port=3 out_port=1
+[FLOW_MOD] t=15688.978036276 dpid=s16 action=add src=00:00:00:00:00:02 dst=00:00:00:00:00:01 in_port=3 out_port=1
+[FLOW_MOD] t=15688.978379406 dpid=s16 action=delete-strict src=00:00:00:00:00:01 dst=00:00:00:00:00:02 in_port=1 out_port=3
+[FLOW_MOD] t=15688.978640374 dpid=s16 action=add src=00:00:00:00:00:01 dst=00:00:00:00:00:02 in_port=1 out_port=3
+[FLOW_MOD] t=15688.980121899 dpid=s4 action=delete-strict src=00:00:00:00:00:01 dst=00:00:00:00:00:02 in_port=1 out_port=2
+[FLOW_MOD] t=15688.980457697 dpid=s4 action=add src=00:00:00:00:00:01 dst=00:00:00:00:00:02 in_port=1 out_port=2
+[FLOW_MOD] t=15688.980798153 dpid=s17 action=delete-strict src=00:00:00:00:00:01 dst=00:00:00:00:00:02 in_port=3 out_port=1
+[FLOW_MOD] t=15688.981120006 dpid=s17 action=add src=00:00:00:00:00:01 dst=00:00:00:00:00:02 in_port=3 out_port=1
+[SPF-DONE] BFS s17->s18 reachable=11/11
+[PATH-COMPUTED] s17->s18: 5 hop(s) path=s17 -> s4 -> s1 -> s2 -> s6 -> s18
+[FLOW-INSTALL] 00:00:00:00:00:02 → 00:00:00:00:00:03: s17 -> s4 -> s1 -> s2 -> s6 -> s18
+[FLOW_MOD] t=15688.982209228 dpid=s17 action=delete-strict src=00:00:00:00:00:02 dst=00:00:00:00:00:03 in_port=1 out_port=3
+[FLOW_MOD] t=15688.982485647 dpid=s17 action=add src=00:00:00:00:00:02 dst=00:00:00:00:00:03 in_port=1 out_port=3
+[FLOW_MOD] t=15688.982808319 dpid=s4 action=delete-strict src=00:00:00:00:00:02 dst=00:00:00:00:00:03 in_port=2 out_port=4
+[FLOW_MOD] t=15688.983065448 dpid=s4 action=add src=00:00:00:00:00:02 dst=00:00:00:00:00:03 in_port=2 out_port=4
+[FLOW_MOD] t=15688.983438152 dpid=s1 action=delete-strict src=00:00:00:00:00:02 dst=00:00:00:00:00:03 in_port=1 out_port=3
+[FLOW_MOD] t=15688.983662126 dpid=s1 action=add src=00:00:00:00:00:02 dst=00:00:00:00:00:03 in_port=1 out_port=3
+[FLOW_MOD] t=15688.983977205 dpid=s2 action=delete-strict src=00:00:00:00:00:02 dst=00:00:00:00:00:03 in_port=3 out_port=1
+[FLOW_MOD] t=15688.984333231 dpid=s2 action=add src=00:00:00:00:00:02 dst=00:00:00:00:00:03 in_port=3 out_port=1
+[FLOW_MOD] t=15688.984680912 dpid=s6 action=delete-strict src=00:00:00:00:00:02 dst=00:00:00:00:00:03 in_port=4 out_port=1
+[FLOW_MOD] t=15688.984976341 dpid=s6 action=add src=00:00:00:00:00:02 dst=00:00:00:00:00:03 in_port=4 out_port=1
+[FLOW_MOD] t=15688.985352055 dpid=s18 action=delete-strict src=00:00:00:00:00:02 dst=00:00:00:00:00:03 in_port=3 out_port=1
+[FLOW_MOD] t=15688.985741906 dpid=s18 action=add src=00:00:00:00:00:02 dst=00:00:00:00:00:03 in_port=3 out_port=1
+[FLOW_MOD] t=15688.986066600 dpid=s18 action=delete-strict src=00:00:00:00:00:03 dst=00:00:00:00:00:02 in_port=1 out_port=3
+[FLOW_MOD] t=15688.986278935 dpid=s18 action=add src=00:00:00:00:00:03 dst=00:00:00:00:00:02 in_port=1 out_port=3
+[FLOW_MOD] t=15688.986597678 dpid=s6 action=delete-strict src=00:00:00:00:00:03 dst=00:00:00:00:00:02 in_port=1 out_port=4
+[FLOW_MOD] t=15688.986821277 dpid=s6 action=add src=00:00:00:00:00:03 dst=00:00:00:00:00:02 in_port=1 out_port=4
+[FLOW_MOD] t=15688.987087036 dpid=s2 action=delete-strict src=00:00:00:00:00:03 dst=00:00:00:00:00:02 in_port=1 out_port=3
+[FLOW_MOD] t=15688.987299500 dpid=s2 action=add src=00:00:00:00:00:03 dst=00:00:00:00:00:02 in_port=1 out_port=3
+[FLOW_MOD] t=15688.987588935 dpid=s1 action=delete-strict src=00:00:00:00:00:03 dst=00:00:00:00:00:02 in_port=3 out_port=1
+[FLOW_MOD] t=15688.987847543 dpid=s1 action=add src=00:00:00:00:00:03 dst=00:00:00:00:00:02 in_port=3 out_port=1
+[FLOW_MOD] t=15688.988194190 dpid=s4 action=delete-strict src=00:00:00:00:00:03 dst=00:00:00:00:00:02 in_port=4 out_port=2
+[FLOW_MOD] t=15688.988505506 dpid=s4 action=add src=00:00:00:00:00:03 dst=00:00:00:00:00:02 in_port=4 out_port=2
+[FLOW_MOD] t=15688.988820834 dpid=s17 action=delete-strict src=00:00:00:00:00:03 dst=00:00:00:00:00:02 in_port=3 out_port=1
+[FLOW_MOD] t=15688.989080644 dpid=s17 action=add src=00:00:00:00:00:03 dst=00:00:00:00:00:02 in_port=3 out_port=1
+[SPF-DONE] BFS s17->s19 reachable=11/11
+[PATH-COMPUTED] s17->s19: 5 hop(s) path=s17 -> s4 -> s1 -> s2 -> s6 -> s19
+[FLOW-INSTALL] 00:00:00:00:00:02 → 00:00:00:00:00:04: s17 -> s4 -> s1 -> s2 -> s6 -> s19
+[FLOW_MOD] t=15688.990140689 dpid=s17 action=delete-strict src=00:00:00:00:00:02 dst=00:00:00:00:00:04 in_port=1 out_port=3
+[FLOW_MOD] t=15688.990442551 dpid=s17 action=add src=00:00:00:00:00:02 dst=00:00:00:00:00:04 in_port=1 out_port=3
+[FLOW_MOD] t=15688.990794398 dpid=s4 action=delete-strict src=00:00:00:00:00:02 dst=00:00:00:00:00:04 in_port=2 out_port=4
+[FLOW_MOD] t=15688.991069189 dpid=s4 action=add src=00:00:00:00:00:02 dst=00:00:00:00:00:04 in_port=2 out_port=4
+[FLOW_MOD] t=15688.991386565 dpid=s1 action=delete-strict src=00:00:00:00:00:02 dst=00:00:00:00:00:04 in_port=1 out_port=3
+[FLOW_MOD] t=15688.991654928 dpid=s1 action=add src=00:00:00:00:00:02 dst=00:00:00:00:00:04 in_port=1 out_port=3
+[FLOW_MOD] t=15688.992086476 dpid=s2 action=delete-strict src=00:00:00:00:00:02 dst=00:00:00:00:00:04 in_port=3 out_port=1
+[FLOW_MOD] t=15688.992341402 dpid=s2 action=add src=00:00:00:00:00:02 dst=00:00:00:00:00:04 in_port=3 out_port=1
+[FLOW_MOD] t=15688.992636022 dpid=s6 action=delete-strict src=00:00:00:00:00:02 dst=00:00:00:00:00:04 in_port=4 out_port=2
+[FLOW_MOD] t=15688.992851373 dpid=s6 action=add src=00:00:00:00:00:02 dst=00:00:00:00:00:04 in_port=4 out_port=2
+[FLOW_MOD] t=15688.993179141 dpid=s19 action=delete-strict src=00:00:00:00:00:02 dst=00:00:00:00:00:04 in_port=3 out_port=1
+[FLOW_MOD] t=15688.993557818 dpid=s19 action=add src=00:00:00:00:00:02 dst=00:00:00:00:00:04 in_port=3 out_port=1
+[FLOW_MOD] t=15688.993867927 dpid=s19 action=delete-strict src=00:00:00:00:00:04 dst=00:00:00:00:00:02 in_port=1 out_port=3
+[FLOW_MOD] t=15688.994113823 dpid=s19 action=add src=00:00:00:00:00:04 dst=00:00:00:00:00:02 in_port=1 out_port=3
+[FLOW_MOD] t=15688.994515251 dpid=s6 action=delete-strict src=00:00:00:00:00:04 dst=00:00:00:00:00:02 in_port=2 out_port=4
+[FLOW_MOD] t=15688.994753083 dpid=s6 action=add src=00:00:00:00:00:04 dst=00:00:00:00:00:02 in_port=2 out_port=4
+[FLOW_MOD] t=15688.995154509 dpid=s2 action=delete-strict src=00:00:00:00:00:04 dst=00:00:00:00:00:02 in_port=1 out_port=3
+[FLOW_MOD] t=15688.995470413 dpid=s2 action=add src=00:00:00:00:00:04 dst=00:00:00:00:00:02 in_port=1 out_port=3
+[FLOW_MOD] t=15688.995834284 dpid=s1 action=delete-strict src=00:00:00:00:00:04 dst=00:00:00:00:00:02 in_port=3 out_port=1
+[FLOW_MOD] t=15688.996143291 dpid=s1 action=add src=00:00:00:00:00:04 dst=00:00:00:00:00:02 in_port=3 out_port=1
+[FLOW_MOD] t=15688.996471305 dpid=s4 action=delete-strict src=00:00:00:00:00:04 dst=00:00:00:00:00:02 in_port=4 out_port=2
+[FLOW_MOD] t=15688.996719982 dpid=s4 action=add src=00:00:00:00:00:04 dst=00:00:00:00:00:02 in_port=4 out_port=2
+[FLOW_MOD] t=15688.996995331 dpid=s17 action=delete-strict src=00:00:00:00:00:04 dst=00:00:00:00:00:02 in_port=3 out_port=1
+[FLOW_MOD] t=15688.997232679 dpid=s17 action=add src=00:00:00:00:00:04 dst=00:00:00:00:00:02 in_port=3 out_port=1
+[SPF-DONE] BFS s18->s16 reachable=11/11
+[PATH-COMPUTED] s18->s16: 5 hop(s) path=s18 -> s6 -> s2 -> s1 -> s4 -> s16
+[FLOW-INSTALL] 00:00:00:00:00:03 → 00:00:00:00:00:01: s18 -> s6 -> s2 -> s1 -> s4 -> s16
+[FLOW_MOD] t=15688.998157103 dpid=s18 action=delete-strict src=00:00:00:00:00:03 dst=00:00:00:00:00:01 in_port=1 out_port=3
+[FLOW_MOD] t=15688.998522884 dpid=s18 action=add src=00:00:00:00:00:03 dst=00:00:00:00:00:01 in_port=1 out_port=3
+[FLOW_MOD] t=15688.998904234 dpid=s6 action=delete-strict src=00:00:00:00:00:03 dst=00:00:00:00:00:01 in_port=1 out_port=4
+[FLOW_MOD] t=15688.999261071 dpid=s6 action=add src=00:00:00:00:00:03 dst=00:00:00:00:00:01 in_port=1 out_port=4
+[FLOW_MOD] t=15688.999639658 dpid=s2 action=delete-strict src=00:00:00:00:00:03 dst=00:00:00:00:00:01 in_port=1 out_port=3
+[FLOW_MOD] t=15688.999925339 dpid=s2 action=add src=00:00:00:00:00:03 dst=00:00:00:00:00:01 in_port=1 out_port=3
+[FLOW_MOD] t=15689.000298842 dpid=s1 action=delete-strict src=00:00:00:00:00:03 dst=00:00:00:00:00:01 in_port=3 out_port=1
+[FLOW_MOD] t=15689.000616100 dpid=s1 action=add src=00:00:00:00:00:03 dst=00:00:00:00:00:01 in_port=3 out_port=1
+[FLOW_MOD] t=15689.001000203 dpid=s4 action=delete-strict src=00:00:00:00:00:03 dst=00:00:00:00:00:01 in_port=4 out_port=1
+[FLOW_MOD] t=15689.001278413 dpid=s4 action=add src=00:00:00:00:00:03 dst=00:00:00:00:00:01 in_port=4 out_port=1
+[FLOW_MOD] t=15689.001636379 dpid=s16 action=delete-strict src=00:00:00:00:00:03 dst=00:00:00:00:00:01 in_port=3 out_port=1
+[FLOW_MOD] t=15689.001900043 dpid=s16 action=add src=00:00:00:00:00:03 dst=00:00:00:00:00:01 in_port=3 out_port=1
+[FLOW_MOD] t=15689.002279851 dpid=s16 action=delete-strict src=00:00:00:00:00:01 dst=00:00:00:00:00:03 in_port=1 out_port=3
+[FLOW_MOD] t=15689.002579257 dpid=s16 action=add src=00:00:00:00:00:01 dst=00:00:00:00:00:03 in_port=1 out_port=3
+[FLOW_MOD] t=15689.002956038 dpid=s4 action=delete-strict src=00:00:00:00:00:01 dst=00:00:00:00:00:03 in_port=1 out_port=4
+[FLOW_MOD] t=15689.003244395 dpid=s4 action=add src=00:00:00:00:00:01 dst=00:00:00:00:00:03 in_port=1 out_port=4
+[FLOW_MOD] t=15689.003610063 dpid=s1 action=delete-strict src=00:00:00:00:00:01 dst=00:00:00:00:00:03 in_port=1 out_port=3
+[FLOW_MOD] t=15689.004068789 dpid=s1 action=add src=00:00:00:00:00:01 dst=00:00:00:00:00:03 in_port=1 out_port=3
+[FLOW_MOD] t=15689.004501711 dpid=s2 action=delete-strict src=00:00:00:00:00:01 dst=00:00:00:00:00:03 in_port=3 out_port=1
+[FLOW_MOD] t=15689.004842724 dpid=s2 action=add src=00:00:00:00:00:01 dst=00:00:00:00:00:03 in_port=3 out_port=1
+[FLOW_MOD] t=15689.005263610 dpid=s6 action=delete-strict src=00:00:00:00:00:01 dst=00:00:00:00:00:03 in_port=4 out_port=1
+[FLOW_MOD] t=15689.005625245 dpid=s6 action=add src=00:00:00:00:00:01 dst=00:00:00:00:00:03 in_port=4 out_port=1
+[FLOW_MOD] t=15689.005996765 dpid=s18 action=delete-strict src=00:00:00:00:00:01 dst=00:00:00:00:00:03 in_port=3 out_port=1
+[FLOW_MOD] t=15689.006291230 dpid=s18 action=add src=00:00:00:00:00:01 dst=00:00:00:00:00:03 in_port=3 out_port=1
+[SPF-DONE] BFS s18->s17 reachable=11/11
+[PATH-COMPUTED] s18->s17: 5 hop(s) path=s18 -> s6 -> s2 -> s1 -> s4 -> s17
+[FLOW-INSTALL] 00:00:00:00:00:03 → 00:00:00:00:00:02: s18 -> s6 -> s2 -> s1 -> s4 -> s17
+[FLOW_MOD] t=15689.007576797 dpid=s18 action=delete-strict src=00:00:00:00:00:03 dst=00:00:00:00:00:02 in_port=1 out_port=3
+[FLOW_MOD] t=15689.007962266 dpid=s18 action=add src=00:00:00:00:00:03 dst=00:00:00:00:00:02 in_port=1 out_port=3
+[FLOW_MOD] t=15689.008755826 dpid=s6 action=delete-strict src=00:00:00:00:00:03 dst=00:00:00:00:00:02 in_port=1 out_port=4
+[FLOW_MOD] t=15689.009225440 dpid=s6 action=add src=00:00:00:00:00:03 dst=00:00:00:00:00:02 in_port=1 out_port=4
+[FLOW_MOD] t=15689.009829781 dpid=s2 action=delete-strict src=00:00:00:00:00:03 dst=00:00:00:00:00:02 in_port=1 out_port=3
+[FLOW_MOD] t=15689.010242100 dpid=s2 action=add src=00:00:00:00:00:03 dst=00:00:00:00:00:02 in_port=1 out_port=3
+[FLOW_MOD] t=15689.010672602 dpid=s1 action=delete-strict src=00:00:00:00:00:03 dst=00:00:00:00:00:02 in_port=3 out_port=1
+[FLOW_MOD] t=15689.010999938 dpid=s1 action=add src=00:00:00:00:00:03 dst=00:00:00:00:00:02 in_port=3 out_port=1
+[FLOW_MOD] t=15689.011430808 dpid=s4 action=delete-strict src=00:00:00:00:00:03 dst=00:00:00:00:00:02 in_port=4 out_port=2
+[FLOW_MOD] t=15689.011759567 dpid=s4 action=add src=00:00:00:00:00:03 dst=00:00:00:00:00:02 in_port=4 out_port=2
+[FLOW_MOD] t=15689.012219352 dpid=s17 action=delete-strict src=00:00:00:00:00:03 dst=00:00:00:00:00:02 in_port=3 out_port=1
+[FLOW_MOD] t=15689.012538542 dpid=s17 action=add src=00:00:00:00:00:03 dst=00:00:00:00:00:02 in_port=3 out_port=1
+[FLOW_MOD] t=15689.012920399 dpid=s17 action=delete-strict src=00:00:00:00:00:02 dst=00:00:00:00:00:03 in_port=1 out_port=3
+[FLOW_MOD] t=15689.013180646 dpid=s17 action=add src=00:00:00:00:00:02 dst=00:00:00:00:00:03 in_port=1 out_port=3
+[FLOW_MOD] t=15689.013565536 dpid=s4 action=delete-strict src=00:00:00:00:00:02 dst=00:00:00:00:00:03 in_port=2 out_port=4
+[FLOW_MOD] t=15689.015857844 dpid=s4 action=add src=00:00:00:00:00:02 dst=00:00:00:00:00:03 in_port=2 out_port=4
+[FLOW_MOD] t=15689.016351343 dpid=s1 action=delete-strict src=00:00:00:00:00:02 dst=00:00:00:00:00:03 in_port=1 out_port=3
+[FLOW_MOD] t=15689.016644890 dpid=s1 action=add src=00:00:00:00:00:02 dst=00:00:00:00:00:03 in_port=1 out_port=3
+[FLOW_MOD] t=15689.016963543 dpid=s2 action=delete-strict src=00:00:00:00:00:02 dst=00:00:00:00:00:03 in_port=3 out_port=1
+[FLOW_MOD] t=15689.017194787 dpid=s2 action=add src=00:00:00:00:00:02 dst=00:00:00:00:00:03 in_port=3 out_port=1
+[FLOW_MOD] t=15689.017516475 dpid=s6 action=delete-strict src=00:00:00:00:00:02 dst=00:00:00:00:00:03 in_port=4 out_port=1
+[FLOW_MOD] t=15689.017778265 dpid=s6 action=add src=00:00:00:00:00:02 dst=00:00:00:00:00:03 in_port=4 out_port=1
+[FLOW_MOD] t=15689.018174032 dpid=s18 action=delete-strict src=00:00:00:00:00:02 dst=00:00:00:00:00:03 in_port=3 out_port=1
+[FLOW_MOD] t=15689.018474295 dpid=s18 action=add src=00:00:00:00:00:02 dst=00:00:00:00:00:03 in_port=3 out_port=1
+[SPF-DONE] BFS s18->s19 reachable=11/11
+[PATH-COMPUTED] s18->s19: 2 hop(s) path=s18 -> s6 -> s19
+[FLOW-INSTALL] 00:00:00:00:00:03 → 00:00:00:00:00:04: s18 -> s6 -> s19
+[FLOW_MOD] t=15689.019727898 dpid=s18 action=delete-strict src=00:00:00:00:00:03 dst=00:00:00:00:00:04 in_port=1 out_port=3
+[FLOW_MOD] t=15689.020076333 dpid=s18 action=add src=00:00:00:00:00:03 dst=00:00:00:00:00:04 in_port=1 out_port=3
+[FLOW_MOD] t=15689.020473600 dpid=s6 action=delete-strict src=00:00:00:00:00:03 dst=00:00:00:00:00:04 in_port=1 out_port=2
+[FLOW_MOD] t=15689.020763250 dpid=s6 action=add src=00:00:00:00:00:03 dst=00:00:00:00:00:04 in_port=1 out_port=2
+[FLOW_MOD] t=15689.021375936 dpid=s19 action=delete-strict src=00:00:00:00:00:03 dst=00:00:00:00:00:04 in_port=3 out_port=1
+[FLOW_MOD] t=15689.021794111 dpid=s19 action=add src=00:00:00:00:00:03 dst=00:00:00:00:00:04 in_port=3 out_port=1
+[FLOW_MOD] t=15689.022237228 dpid=s19 action=delete-strict src=00:00:00:00:00:04 dst=00:00:00:00:00:03 in_port=1 out_port=3
+[FLOW_MOD] t=15689.022549327 dpid=s19 action=add src=00:00:00:00:00:04 dst=00:00:00:00:00:03 in_port=1 out_port=3
+[FLOW_MOD] t=15689.022888021 dpid=s6 action=delete-strict src=00:00:00:00:00:04 dst=00:00:00:00:00:03 in_port=2 out_port=1
+[FLOW_MOD] t=15689.023151755 dpid=s6 action=add src=00:00:00:00:00:04 dst=00:00:00:00:00:03 in_port=2 out_port=1
+[FLOW_MOD] t=15689.023477502 dpid=s18 action=delete-strict src=00:00:00:00:00:04 dst=00:00:00:00:00:03 in_port=3 out_port=1
+[FLOW_MOD] t=15689.023732338 dpid=s18 action=add src=00:00:00:00:00:04 dst=00:00:00:00:00:03 in_port=3 out_port=1
+[SPF-DONE] BFS s19->s16 reachable=11/11
+[PATH-COMPUTED] s19->s16: 5 hop(s) path=s19 -> s6 -> s2 -> s1 -> s4 -> s16
+[FLOW-INSTALL] 00:00:00:00:00:04 → 00:00:00:00:00:01: s19 -> s6 -> s2 -> s1 -> s4 -> s16
+[FLOW_MOD] t=15689.024698335 dpid=s19 action=delete-strict src=00:00:00:00:00:04 dst=00:00:00:00:00:01 in_port=1 out_port=3
+[FLOW_MOD] t=15689.024958989 dpid=s19 action=add src=00:00:00:00:00:04 dst=00:00:00:00:00:01 in_port=1 out_port=3
+[FLOW_MOD] t=15689.025314823 dpid=s6 action=delete-strict src=00:00:00:00:00:04 dst=00:00:00:00:00:01 in_port=2 out_port=4
+[FLOW_MOD] t=15689.025587007 dpid=s6 action=add src=00:00:00:00:00:04 dst=00:00:00:00:00:01 in_port=2 out_port=4
+[FLOW_MOD] t=15689.025966786 dpid=s2 action=delete-strict src=00:00:00:00:00:04 dst=00:00:00:00:00:01 in_port=1 out_port=3
+[FLOW_MOD] t=15689.026245227 dpid=s2 action=add src=00:00:00:00:00:04 dst=00:00:00:00:00:01 in_port=1 out_port=3
+[FLOW_MOD] t=15689.026558888 dpid=s1 action=delete-strict src=00:00:00:00:00:04 dst=00:00:00:00:00:01 in_port=3 out_port=1
+[FLOW_MOD] t=15689.026812225 dpid=s1 action=add src=00:00:00:00:00:04 dst=00:00:00:00:00:01 in_port=3 out_port=1
+[FLOW_MOD] t=15689.027145479 dpid=s4 action=delete-strict src=00:00:00:00:00:04 dst=00:00:00:00:00:01 in_port=4 out_port=1
+[FLOW_MOD] t=15689.027396486 dpid=s4 action=add src=00:00:00:00:00:04 dst=00:00:00:00:00:01 in_port=4 out_port=1
+[FLOW_MOD] t=15689.027702400 dpid=s16 action=delete-strict src=00:00:00:00:00:04 dst=00:00:00:00:00:01 in_port=3 out_port=1
+[FLOW_MOD] t=15689.027965468 dpid=s16 action=add src=00:00:00:00:00:04 dst=00:00:00:00:00:01 in_port=3 out_port=1
+[FLOW_MOD] t=15689.028379965 dpid=s16 action=delete-strict src=00:00:00:00:00:01 dst=00:00:00:00:00:04 in_port=1 out_port=3
+[FLOW_MOD] t=15689.028683978 dpid=s16 action=add src=00:00:00:00:00:01 dst=00:00:00:00:00:04 in_port=1 out_port=3
+[FLOW_MOD] t=15689.029035507 dpid=s4 action=delete-strict src=00:00:00:00:00:01 dst=00:00:00:00:00:04 in_port=1 out_port=4
+[FLOW_MOD] t=15689.029303774 dpid=s4 action=add src=00:00:00:00:00:01 dst=00:00:00:00:00:04 in_port=1 out_port=4
+[FLOW_MOD] t=15689.029649342 dpid=s1 action=delete-strict src=00:00:00:00:00:01 dst=00:00:00:00:00:04 in_port=1 out_port=3
+[FLOW_MOD] t=15689.029914364 dpid=s1 action=add src=00:00:00:00:00:01 dst=00:00:00:00:00:04 in_port=1 out_port=3
+[FLOW_MOD] t=15689.030242159 dpid=s2 action=delete-strict src=00:00:00:00:00:01 dst=00:00:00:00:00:04 in_port=3 out_port=1
+[FLOW_MOD] t=15689.030494611 dpid=s2 action=add src=00:00:00:00:00:01 dst=00:00:00:00:00:04 in_port=3 out_port=1
+[FLOW_MOD] t=15689.030804562 dpid=s6 action=delete-strict src=00:00:00:00:00:01 dst=00:00:00:00:00:04 in_port=4 out_port=2
+[FLOW_MOD] t=15689.031064148 dpid=s6 action=add src=00:00:00:00:00:01 dst=00:00:00:00:00:04 in_port=4 out_port=2
+[FLOW_MOD] t=15689.031370243 dpid=s19 action=delete-strict src=00:00:00:00:00:01 dst=00:00:00:00:00:04 in_port=3 out_port=1
+[FLOW_MOD] t=15689.031644147 dpid=s19 action=add src=00:00:00:00:00:01 dst=00:00:00:00:00:04 in_port=3 out_port=1
+[SPF-DONE] BFS s19->s17 reachable=11/11
+[PATH-COMPUTED] s19->s17: 5 hop(s) path=s19 -> s6 -> s2 -> s1 -> s4 -> s17
+[FLOW-INSTALL] 00:00:00:00:00:04 → 00:00:00:00:00:02: s19 -> s6 -> s2 -> s1 -> s4 -> s17
+[FLOW_MOD] t=15689.032707365 dpid=s19 action=delete-strict src=00:00:00:00:00:04 dst=00:00:00:00:00:02 in_port=1 out_port=3
+[FLOW_MOD] t=15689.032936776 dpid=s19 action=add src=00:00:00:00:00:04 dst=00:00:00:00:00:02 in_port=1 out_port=3
+[FLOW_MOD] t=15689.033244885 dpid=s6 action=delete-strict src=00:00:00:00:00:04 dst=00:00:00:00:00:02 in_port=2 out_port=4
+[FLOW_MOD] t=15689.033486596 dpid=s6 action=add src=00:00:00:00:00:04 dst=00:00:00:00:00:02 in_port=2 out_port=4
+[FLOW_MOD] t=15689.033858949 dpid=s2 action=delete-strict src=00:00:00:00:00:04 dst=00:00:00:00:00:02 in_port=1 out_port=3
+[FLOW_MOD] t=15689.034148659 dpid=s2 action=add src=00:00:00:00:00:04 dst=00:00:00:00:00:02 in_port=1 out_port=3
+[FLOW_MOD] t=15689.034482684 dpid=s1 action=delete-strict src=00:00:00:00:00:04 dst=00:00:00:00:00:02 in_port=3 out_port=1
+[FLOW_MOD] t=15689.034737217 dpid=s1 action=add src=00:00:00:00:00:04 dst=00:00:00:00:00:02 in_port=3 out_port=1
+[FLOW_MOD] t=15689.035057708 dpid=s4 action=delete-strict src=00:00:00:00:00:04 dst=00:00:00:00:00:02 in_port=4 out_port=2
+[FLOW_MOD] t=15689.035359086 dpid=s4 action=add src=00:00:00:00:00:04 dst=00:00:00:00:00:02 in_port=4 out_port=2
+[FLOW_MOD] t=15689.035739029 dpid=s17 action=delete-strict src=00:00:00:00:00:04 dst=00:00:00:00:00:02 in_port=3 out_port=1
+[FLOW_MOD] t=15689.036110034 dpid=s17 action=add src=00:00:00:00:00:04 dst=00:00:00:00:00:02 in_port=3 out_port=1
+[FLOW_MOD] t=15689.036482875 dpid=s17 action=delete-strict src=00:00:00:00:00:02 dst=00:00:00:00:00:04 in_port=1 out_port=3
+[FLOW_MOD] t=15689.036743170 dpid=s17 action=add src=00:00:00:00:00:02 dst=00:00:00:00:00:04 in_port=1 out_port=3
+[FLOW_MOD] t=15689.037071444 dpid=s4 action=delete-strict src=00:00:00:00:00:02 dst=00:00:00:00:00:04 in_port=2 out_port=4
+[FLOW_MOD] t=15689.037321708 dpid=s4 action=add src=00:00:00:00:00:02 dst=00:00:00:00:00:04 in_port=2 out_port=4
+[FLOW_MOD] t=15689.037805168 dpid=s1 action=delete-strict src=00:00:00:00:00:02 dst=00:00:00:00:00:04 in_port=1 out_port=3
+[FLOW_MOD] t=15689.038167832 dpid=s1 action=add src=00:00:00:00:00:02 dst=00:00:00:00:00:04 in_port=1 out_port=3
+[FLOW_MOD] t=15689.038580707 dpid=s2 action=delete-strict src=00:00:00:00:00:02 dst=00:00:00:00:00:04 in_port=3 out_port=1
+[FLOW_MOD] t=15689.038861478 dpid=s2 action=add src=00:00:00:00:00:02 dst=00:00:00:00:00:04 in_port=3 out_port=1
+[FLOW_MOD] t=15689.039214243 dpid=s6 action=delete-strict src=00:00:00:00:00:02 dst=00:00:00:00:00:04 in_port=4 out_port=2
+[FLOW_MOD] t=15689.039473543 dpid=s6 action=add src=00:00:00:00:00:02 dst=00:00:00:00:00:04 in_port=4 out_port=2
+[FLOW_MOD] t=15689.039785472 dpid=s19 action=delete-strict src=00:00:00:00:00:02 dst=00:00:00:00:00:04 in_port=3 out_port=1
+[FLOW_MOD] t=15689.040081422 dpid=s19 action=add src=00:00:00:00:00:02 dst=00:00:00:00:00:04 in_port=3 out_port=1
+[SPF-DONE] BFS s19->s18 reachable=11/11
+[PATH-COMPUTED] s19->s18: 2 hop(s) path=s19 -> s6 -> s18
+[FLOW-INSTALL] 00:00:00:00:00:04 → 00:00:00:00:00:03: s19 -> s6 -> s18
+[FLOW_MOD] t=15689.041205758 dpid=s19 action=delete-strict src=00:00:00:00:00:04 dst=00:00:00:00:00:03 in_port=1 out_port=3
+[FLOW_MOD] t=15689.041484251 dpid=s19 action=add src=00:00:00:00:00:04 dst=00:00:00:00:00:03 in_port=1 out_port=3
+[FLOW_MOD] t=15689.041820910 dpid=s6 action=delete-strict src=00:00:00:00:00:04 dst=00:00:00:00:00:03 in_port=2 out_port=1
+[FLOW_MOD] t=15689.042098462 dpid=s6 action=add src=00:00:00:00:00:04 dst=00:00:00:00:00:03 in_port=2 out_port=1
+[FLOW_MOD] t=15689.042446278 dpid=s18 action=delete-strict src=00:00:00:00:00:04 dst=00:00:00:00:00:03 in_port=3 out_port=1
+[FLOW_MOD] t=15689.042700751 dpid=s18 action=add src=00:00:00:00:00:04 dst=00:00:00:00:00:03 in_port=3 out_port=1
+[FLOW_MOD] t=15689.043014148 dpid=s18 action=delete-strict src=00:00:00:00:00:03 dst=00:00:00:00:00:04 in_port=1 out_port=3
+[FLOW_MOD] t=15689.043253661 dpid=s18 action=add src=00:00:00:00:00:03 dst=00:00:00:00:00:04 in_port=1 out_port=3
+[FLOW_MOD] t=15689.043548041 dpid=s6 action=delete-strict src=00:00:00:00:00:03 dst=00:00:00:00:00:04 in_port=1 out_port=2
+[FLOW_MOD] t=15689.045407033 dpid=s6 action=add src=00:00:00:00:00:03 dst=00:00:00:00:00:04 in_port=1 out_port=2
+[FLOW_MOD] t=15689.045884271 dpid=s19 action=delete-strict src=00:00:00:00:00:03 dst=00:00:00:00:00:04 in_port=3 out_port=1
+[FLOW_MOD] t=15689.046162981 dpid=s19 action=add src=00:00:00:00:00:03 dst=00:00:00:00:00:04 in_port=3 out_port=1
+[TOPO] route refresh: installed=12 skipped=0 unreachable=0 hosts=4
+[CONVERGENCE-END] id=1 convergence_ms=1039.523 installed=12 skipped=0 unreachable=0 hosts=4

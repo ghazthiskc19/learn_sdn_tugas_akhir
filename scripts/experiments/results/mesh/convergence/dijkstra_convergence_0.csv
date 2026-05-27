@@ -1,5 +1,0 @@
-Scenario,Convergence_Time_Seconds,Status
-Cold-Start Convergence,2.346,SUCCESS
-Core Failure,0.380,SUCCESS
-Edge Failure,1.180,SUCCESS
-Node Failure,1.014,SUCCESS

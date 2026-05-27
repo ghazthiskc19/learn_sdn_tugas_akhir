@@ -74,7 +74,7 @@ class SuurballeBalancedFailoverSwitch(SPFBaseController):
             priority=BAL_FLOW_PRIORITY,
             match=match,
         ))
-        datapath.send_msg(parser.OFPFlowMod(
+        add_mod = parser.OFPFlowMod(
             datapath=datapath,
             cookie=BAL_FLOW_COOKIE,
             command=ofproto.OFPFC_ADD,
@@ -83,7 +83,9 @@ class SuurballeBalancedFailoverSwitch(SPFBaseController):
             priority=BAL_FLOW_PRIORITY,
             match=match,
             instructions=inst,
-        ))
+        )
+        datapath.send_msg(add_mod)
+        self._mark_convergence_flowmod()
 
     def _install_fast_failover_group(self, datapath, group_id, primary_port, backup_port):
         parser = datapath.ofproto_parser

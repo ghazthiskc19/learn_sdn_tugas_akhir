@@ -157,6 +157,8 @@ dpctl dump-group-stats -O OpenFlow13
 
 *widest_path requires `link_weights.json`; falls back to hop-count without it.
 
+Untuk penjelasan naratif yang lebih lengkap tentang empat algoritma inti yang dibahas di tugas ini, lihat [penjelasan algoritma routing](penjelasan-algoritma.md).
+
 ---
 
 ## Running Tests

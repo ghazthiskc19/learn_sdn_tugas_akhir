@@ -1,0 +1,81 @@
+algorithm,controller,second,bits_per_second,path,hop_count,total_bandwidth_mbps
+bfs,bfs_osken_controller.py,1,52424812.803248346,SwitchA -> SwitchD,1,0.0
+bfs,bfs_osken_controller.py,2,40856061.0005639,SwitchA -> SwitchD,1,0.0
+bfs,bfs_osken_controller.py,3,51416832.60302135,SwitchA -> SwitchD,1,0.0
+bfs,bfs_osken_controller.py,4,41939140.362600945,SwitchA -> SwitchD,1,0.0
+bfs,bfs_osken_controller.py,5,52436088.51308897,SwitchA -> SwitchD,1,0.0
+bfs,bfs_osken_controller.py,6,52427700.023078434,SwitchA -> SwitchD,1,0.0
+bfs,bfs_osken_controller.py,7,41943795.0135907,SwitchA -> SwitchD,1,0.0
+bfs,bfs_osken_controller.py,8,52426862.571597435,SwitchA -> SwitchD,1,0.0
+bfs,bfs_osken_controller.py,9,41945640.16118095,SwitchA -> SwitchD,1,0.0
+bfs,bfs_osken_controller.py,10,52425393.9712865,SwitchA -> SwitchD,1,0.0
+bfs,bfs_osken_controller.py,11,41944297.53770241,SwitchA -> SwitchD,1,0.0
+bfs,bfs_osken_controller.py,12,52430531.307169445,SwitchA -> SwitchD,1,0.0
+bfs,bfs_osken_controller.py,13,41942620.00420566,SwitchA -> SwitchD,1,0.0
+bfs,bfs_osken_controller.py,14,52424869.04475342,SwitchA -> SwitchD,1,0.0
+bfs,bfs_osken_controller.py,15,52431997.0699431,SwitchA -> SwitchD,1,0.0
+bfs,bfs_osken_controller.py,16,41939225.3469682,SwitchA -> SwitchD,1,0.0
+bfs,bfs_osken_controller.py,17,52433362.897076,SwitchA -> SwitchD,1,0.0
+bfs,bfs_osken_controller.py,18,41938050.59359402,SwitchA -> SwitchD,1,0.0
+bfs,bfs_osken_controller.py,19,52434094.28456533,SwitchA -> SwitchD,1,0.0
+bfs,bfs_osken_controller.py,20,41937000.86966389,SwitchA -> SwitchD,1,0.0
+astar,astar_osken_controller.py,1,486507656.0535387,SwitchA -> SwitchB -> SwitchD,2,0.0
+astar,astar_osken_controller.py,2,471845531.645943,SwitchA -> SwitchB -> SwitchD,2,0.0
+astar,astar_osken_controller.py,3,482345937.501981,SwitchA -> SwitchB -> SwitchD,2,0.0
+astar,astar_osken_controller.py,4,482317476.56606215,SwitchA -> SwitchB -> SwitchD,2,0.0
+astar,astar_osken_controller.py,5,471900716.152444,SwitchA -> SwitchB -> SwitchD,2,0.0
+astar,astar_osken_controller.py,6,482329033.0259242,SwitchA -> SwitchB -> SwitchD,2,0.0
+astar,astar_osken_controller.py,7,471854475.0473137,SwitchA -> SwitchB -> SwitchD,2,0.0
+astar,astar_osken_controller.py,8,482363303.1975508,SwitchA -> SwitchB -> SwitchD,2,0.0
+astar,astar_osken_controller.py,9,482221021.853991,SwitchA -> SwitchB -> SwitchD,2,0.0
+astar,astar_osken_controller.py,10,471990411.47627383,SwitchA -> SwitchB -> SwitchD,2,0.0
+astar,astar_osken_controller.py,11,482308277.7898848,SwitchA -> SwitchB -> SwitchD,2,0.0
+astar,astar_osken_controller.py,12,471873825.4533074,SwitchA -> SwitchB -> SwitchD,2,0.0
+astar,astar_osken_controller.py,13,482338232.5938304,SwitchA -> SwitchB -> SwitchD,2,0.0
+astar,astar_osken_controller.py,14,482349301.289073,SwitchA -> SwitchB -> SwitchD,2,0.0
+astar,astar_osken_controller.py,15,471862040.6421009,SwitchA -> SwitchB -> SwitchD,2,0.0
+astar,astar_osken_controller.py,16,482335300.1934585,SwitchA -> SwitchB -> SwitchD,2,0.0
+astar,astar_osken_controller.py,17,471861084.3825253,SwitchA -> SwitchB -> SwitchD,2,0.0
+astar,astar_osken_controller.py,18,482343005.0079238,SwitchA -> SwitchB -> SwitchD,2,0.0
+astar,astar_osken_controller.py,19,482382107.860727,SwitchA -> SwitchB -> SwitchD,2,0.0
+astar,astar_osken_controller.py,20,471819547.0825323,SwitchA -> SwitchB -> SwitchD,2,0.0
+bellman-ford,bellman_ford_osken_controller.py,1,485445028.9195164,SwitchA -> SwitchB -> SwitchD,2,0.0
+bellman-ford,bellman_ford_osken_controller.py,2,482343982.501981,SwitchA -> SwitchB -> SwitchD,2,0.0
+bellman-ford,bellman_ford_osken_controller.py,3,471856387.5167637,SwitchA -> SwitchB -> SwitchD,2,0.0
+bellman-ford,bellman_ford_osken_controller.py,4,482362814.4108718,SwitchA -> SwitchB -> SwitchD,2,0.0
+bellman-ford,bellman_ford_osken_controller.py,5,471851662.62040246,SwitchA -> SwitchB -> SwitchD,2,0.0
+bellman-ford,bellman_ford_osken_controller.py,6,482349301.289073,SwitchA -> SwitchB -> SwitchD,2,0.0
+bellman-ford,bellman_ford_osken_controller.py,7,482347863.7674809,SwitchA -> SwitchB -> SwitchD,2,0.0
+bellman-ford,bellman_ford_osken_controller.py,8,471836082.382648,SwitchA -> SwitchB -> SwitchD,2,0.0
+bellman-ford,bellman_ford_osken_controller.py,9,482366178.4333613,SwitchA -> SwitchB -> SwitchD,2,0.0
+bellman-ford,bellman_ford_osken_controller.py,10,471844125.481602,SwitchA -> SwitchB -> SwitchD,2,0.0
+bellman-ford,bellman_ford_osken_controller.py,11,482351227.5814398,SwitchA -> SwitchB -> SwitchD,2,0.0
+bellman-ford,bellman_ford_osken_controller.py,12,482329033.0259242,SwitchA -> SwitchB -> SwitchD,2,0.0
+bellman-ford,bellman_ford_osken_controller.py,13,471600760.376233,SwitchA -> SwitchB -> SwitchD,2,0.0
+bellman-ford,bellman_ford_osken_controller.py,14,482619563.74567,SwitchA -> SwitchB -> SwitchD,2,0.0
+bellman-ford,bellman_ford_osken_controller.py,15,471870534.64726585,SwitchA -> SwitchB -> SwitchD,2,0.0
+bellman-ford,bellman_ford_osken_controller.py,16,482337255.123078,SwitchA -> SwitchB -> SwitchD,2,0.0
+bellman-ford,bellman_ford_osken_controller.py,17,482356546.5283162,SwitchA -> SwitchB -> SwitchD,2,0.0
+bellman-ford,bellman_ford_osken_controller.py,18,471819547.0825323,SwitchA -> SwitchB -> SwitchD,2,0.0
+bellman-ford,bellman_ford_osken_controller.py,19,482372935.37244064,SwitchA -> SwitchB -> SwitchD,2,0.0
+bellman-ford,bellman_ford_osken_controller.py,20,482092839.35182613,SwitchA -> SwitchB -> SwitchD,2,0.0
+dijkstra,dijkstra_osken_controller.py,1,486500349.1127798,SwitchA -> SwitchB -> SwitchD,2,0.0
+dijkstra,dijkstra_osken_controller.py,2,471846487.842482,SwitchA -> SwitchB -> SwitchD,2,0.0
+dijkstra,dijkstra_osken_controller.py,3,482345448.75049525,SwitchA -> SwitchB -> SwitchD,2,0.0
+dijkstra,dijkstra_osken_controller.py,4,471871940.9690177,SwitchA -> SwitchB -> SwitchD,2,0.0
+dijkstra,dijkstra_osken_controller.py,5,482342085.0171362,SwitchA -> SwitchB -> SwitchD,2,0.0
+dijkstra,dijkstra_osken_controller.py,6,471847387.79570615,SwitchA -> SwitchB -> SwitchD,2,0.0
+dijkstra,dijkstra_osken_controller.py,7,482339152.56992227,SwitchA -> SwitchB -> SwitchD,2,0.0
+dijkstra,dijkstra_osken_controller.py,8,482363763.232977,SwitchA -> SwitchB -> SwitchD,2,0.0
+dijkstra,dijkstra_osken_controller.py,9,471854981.28771824,SwitchA -> SwitchB -> SwitchD,2,0.0
+dijkstra,dijkstra_osken_controller.py,10,482342545.01209134,SwitchA -> SwitchB -> SwitchD,2,0.0
+dijkstra,dijkstra_osken_controller.py,11,471867693.9028954,SwitchA -> SwitchB -> SwitchD,2,0.0
+dijkstra,dijkstra_osken_controller.py,12,482341567.52386045,SwitchA -> SwitchB -> SwitchD,2,0.0
+dijkstra,dijkstra_osken_controller.py,13,482342085.0171362,SwitchA -> SwitchB -> SwitchD,2,0.0
+dijkstra,dijkstra_osken_controller.py,14,471852112.60645527,SwitchA -> SwitchB -> SwitchD,2,0.0
+dijkstra,dijkstra_osken_controller.py,15,482367644.816823,SwitchA -> SwitchB -> SwitchD,2,0.0
+dijkstra,dijkstra_osken_controller.py,16,482224872.4051983,SwitchA -> SwitchB -> SwitchD,2,0.0
+dijkstra,dijkstra_osken_controller.py,17,471960190.35998535,SwitchA -> SwitchB -> SwitchD,2,0.0
+dijkstra,dijkstra_osken_controller.py,18,482343982.501981,SwitchA -> SwitchB -> SwitchD,2,0.0
+dijkstra,dijkstra_osken_controller.py,19,471863925.04731464,SwitchA -> SwitchB -> SwitchD,2,0.0
+dijkstra,dijkstra_osken_controller.py,20,482345937.501981,SwitchA -> SwitchB -> SwitchD,2,0.0

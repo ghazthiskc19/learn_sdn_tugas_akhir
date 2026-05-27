@@ -26,31 +26,26 @@ See Also:
     bellman_ford_osken_controller.py - all-source, supports negative weights
 """
 
-import json
 import os
 import sys
 
 from base_controller import SPFBaseController
 from algorithms.floyd_warshall import floyd_warshall
+from algorithms.weight_utils import build_directed_metric_dict, load_link_metrics
 
 FW_FLOW_COOKIE = 0x464C4F5700000001     # "FLOW" in hex
 FW_FLOW_COOKIE_MASK = 0xFFFFFFFFFFFFFFFF
 FW_FLOW_PRIORITY = 100
 
-WEIGHTS_FILE = os.path.join(os.path.dirname(__file__), "link_weights.json")
+WEIGHTS_FILE = os.environ.get(
+    "SPF_WEIGHTS_FILE",
+    os.path.join(os.path.dirname(__file__), "link_weights.json"),
+)
+WEIGHT_FIELD = os.environ.get("SPF_WEIGHT_FIELD", "bandwidth_mbps")
 
 
 def _load_weights(path):
-    try:
-        with open(path) as f:
-            data = json.load(f)
-        raw = data.get("links", {})
-        return {
-            tuple(int(x) for x in k.split(":")): v.get("bandwidth_mbps", 1)
-            for k, v in raw.items()
-        }
-    except (FileNotFoundError, json.JSONDecodeError, ValueError):
-        return {}
+    return load_link_metrics(path, WEIGHT_FIELD)
 
 
 class FloydWarshallSwitch(SPFBaseController):
@@ -83,12 +78,7 @@ class FloydWarshallSwitch(SPFBaseController):
         if not self._link_weights:
             return None
         weights = {}
-        for u in self.adjacency:
-            for v, _ in self.adjacency[u]:
-                key = (min(u, v), max(u, v))
-                weights[(u, v)] = self._link_weights.get(key, 1)
-                weights[(v, u)] = self._link_weights.get(key, 1)
-        return weights
+        return build_directed_metric_dict(self.adjacency, self._link_weights)
 
     def _on_topology_changed(self):
         """Pre-compute Floyd-Warshall immediately after topology changes.

@@ -88,7 +88,7 @@ class AStarMultipathSwitch(AStarSwitch):
             priority=ASTAR_FLOW_PRIORITY,
             match=match,
         ))
-        datapath.send_msg(parser.OFPFlowMod(
+        add_mod = parser.OFPFlowMod(
             datapath=datapath,
             cookie=ASTAR_FLOW_COOKIE,
             command=ofproto.OFPFC_ADD,
@@ -97,7 +97,9 @@ class AStarMultipathSwitch(AStarSwitch):
             priority=ASTAR_FLOW_PRIORITY,
             match=match,
             instructions=inst,
-        ))
+        )
+        datapath.send_msg(add_mod)
+        self._mark_convergence_flowmod()
 
     def _install_select_group(self, datapath, group_id, out_ports):
         parser = datapath.ofproto_parser
@@ -195,7 +197,8 @@ class AStarMultipathSwitch(AStarSwitch):
         if cache_key in self.path_cache:
             node_paths = self.path_cache[cache_key]
         else:
-            distance, parents = dijkstra_multi_parent(self.adjacency, src)
+            weights = self._build_weight_dict()
+            distance, parents = dijkstra_multi_parent(self.adjacency, src, weights=weights)
             if distance.get(dst, float("inf")) == float("inf"):
                 return []
             node_paths = self._enumerate_node_paths(src, dst, parents, k)

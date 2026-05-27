@@ -23,12 +23,25 @@ import sys
 
 from base_controller import SPFBaseController
 from algorithms.dijkstra import dijkstra
+from algorithms.weight_utils import build_directed_metric_dict, load_link_metrics, bandwidth_to_costs
 
 # Kept as module-level constants for backward compatibility:
 # dijkstra_multipath_osken_controller.py imports these by name.
 SPF_FLOW_COOKIE = 0x5346500000000001
 SPF_FLOW_COOKIE_MASK = 0xFFFFFFFFFFFFFFFF
 SPF_FLOW_PRIORITY = 100
+
+WEIGHTS_FILE = os.environ.get(
+    "SPF_WEIGHTS_FILE",
+    os.path.join(os.path.dirname(__file__), "link_weights.json"),
+)
+WEIGHT_FIELD = os.environ.get("SPF_WEIGHT_FIELD", "bandwidth_mbps")
+REF_BANDWIDTH = float(os.environ.get("SPF_REF_BANDWIDTH", "1000"))
+
+
+def _load_weights(path):
+    """Load link weights from JSON; return {} if file is absent or malformed."""
+    return load_link_metrics(path, WEIGHT_FIELD)
 
 
 class DijkstraSwitch(SPFBaseController):
@@ -41,6 +54,30 @@ class DijkstraSwitch(SPFBaseController):
 
     FLOW_COOKIE = SPF_FLOW_COOKIE
 
+    def __init__(self, *args, **kwargs):
+        super(DijkstraSwitch, self).__init__(*args, **kwargs)
+        raw_weights = _load_weights(WEIGHTS_FILE)
+        if raw_weights:
+            self.logger.info("[DJ-WEIGHTS] loaded %d link weights from %s",
+                             len(raw_weights), WEIGHTS_FILE)
+        else:
+            self.logger.info("[DJ-WEIGHTS] no weight file; using hop-count metric")
+
+    def _build_weight_dict(self):
+        """Build weights dict keyed by (u, v) from the current adjacency.
+
+        We reload the JSON each time so weighted runs can pick up runtime
+        changes without relying on process restart ordering.
+        """
+        link_weights = _load_weights(WEIGHTS_FILE)
+        if not link_weights:
+            return None
+        directed = build_directed_metric_dict(self.adjacency, link_weights)
+        # If weights represent bandwidth, convert to additive cost
+        if WEIGHT_FIELD == "bandwidth_mbps":
+            return bandwidth_to_costs(directed, ref_bandwidth=REF_BANDWIDTH)
+        return directed
+
     def compute_path(self, src, dst, first_port, final_port):
         """Compute shortest path using Dijkstra's algorithm.
 
@@ -50,10 +87,12 @@ class DijkstraSwitch(SPFBaseController):
         """
         self.logger.debug("[PATH-QUERY] Dijkstra: s%d -> s%d", src, dst)
 
+        weights = self._build_weight_dict()
+
         # --- Phase 1: Run Dijkstra from source switch ---
         # Returns distance[v] = min hop count from src to v
         #         previous[v] = predecessor of v on the shortest path
-        distance, previous = dijkstra(self.adjacency, src)
+        distance, previous = dijkstra(self.adjacency, src, weights=weights)
 
         reachable = sum(1 for d in distance.values() if d != float("inf"))
         self.logger.info("[SPF-DONE] s%d->s%d reachable=%d/%d",

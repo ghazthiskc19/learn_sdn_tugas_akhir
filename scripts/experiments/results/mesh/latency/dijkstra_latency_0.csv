@@ -1,5 +1,0 @@
-scenario,jitter_ms,first_packet_ms,subsequent_avg_ms,rtt_avg_ms
-udp_jitter_loss,4.845,204.535,12.898,11.018
-first_vs_subsequent,5.745,114.149,4.607,7.61
-congestion,5.093,180.932,28.539,44.324
-convergence_latency_spike,3.241,273.279,14.181,34.018

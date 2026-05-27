@@ -1,0 +1,5 @@
+scenario_type,algorithm,controller,topology_event,convergence_id,convergence_t1,convergence_t2,convergence_ms,path,hop_count,controller_log,phantom_seed,phantom_nodes,phantom_edges,source_node,destination_node,computation_time_us,nodes_visited,queue_pops,heap_pops,relaxations,path_source,convergence_source
+scenario_a,bfs,bfs_osken_controller.py,Core1<->Core3_down,,,,6.33758499952819,s10 -> s4 -> s1 -> s2 -> s6 -> s13,5,/tmp/hierarchy_conv_bfs_08nq_l_h/controller.log,,,,,,,,,,,topology_fallback,fallback_elapsed
+scenario_b,bfs,phantom_graph,,,,,,s0 -> s388 -> s389 -> s268 -> s499,4,,42,500,2000,0,499,466.14000075351214,418,418,0,0,,
+scenario_a,astar,astar_osken_controller.py,Core1<->Core3_down,,,,5.408547999650182,s10 -> s4 -> s1 -> s2 -> s6 -> s13,5,/tmp/hierarchy_conv_astar_vm7iypd_/controller.log,,,,,,,,,,,topology_fallback,fallback_elapsed
+scenario_b,astar,phantom_graph,,,,,,s0 -> s388 -> s16 -> s17 -> s268 -> s499,5,,42,500,2000,0,499,889.1249999578577,252,0,266,784,,

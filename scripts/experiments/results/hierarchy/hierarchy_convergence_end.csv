@@ -1,0 +1,9 @@
+scenario_type,algorithm,controller,topology_event,convergence_id,convergence_t1,convergence_t2,convergence_ms,path,hop_count,controller_log,source_node,destination_node,convergence_source,path_source,installed,skipped,unreachable,hosts
+scenario_a,bfs,BFSSwitch,port-status:modify,1,15687.912323065,15688.951846004,1039.523,s16 -> s4 -> s17,2,/workspaces/learn_sdn/scripts/experiments/results/hierarchy/controller_logs/controller_bfs.log,s16,s17,controller_log,controller_log,12,0,0,4
+scenario_b,bfs,phantom_graph,,,,,,s0 -> s388 -> s389 -> s268 -> s499,4,,42,500,2000,0,499,574.5020002905221,418,418,0,0,,
+scenario_a,dijkstra,DijkstraSwitch,port-status:modify,1,15313.593681172,15314.412642474,818.961,s16 -> s4 -> s17,2,/workspaces/learn_sdn/scripts/experiments/results/hierarchy/controller_logs/controller_dijkstra.log,s16,s17,controller_log,controller_log,12,0,0,4
+scenario_b,dijkstra,phantom_graph,,,,,,s0 -> s388 -> s16 -> s17 -> s268 -> s499,5,,42,500,2000,0,499,664.3240003540996,285,0,307,802,,
+scenario_a,astar,AStarSwitch,port-status:modify,1,16122.737519472,16125.079620155,2342.101,s16 -> s4 -> s17,2,/workspaces/learn_sdn/scripts/experiments/results/hierarchy/controller_logs/controller_astar.log,s16,s17,controller_log,controller_log,12,0,0,4
+scenario_b,astar,phantom_graph,,,,,,s0 -> s388 -> s16 -> s17 -> s268 -> s499,5,,42,500,2000,0,499,855.1030005037319,252,0,266,784,,
+scenario_a,bellman-ford,BellmanFordSwitch,port-status:modify,1,16795.640622965,16796.357846360,717.223,s16 -> s4 -> s17,2,/workspaces/learn_sdn/scripts/experiments/results/hierarchy/controller_logs/controller_bellman_ford.log,s16,s17,controller_log,controller_log,12,0,0,4
+scenario_b,bellman-ford,phantom_graph,,,,,,s0 -> s388 -> s16 -> s17 -> s268 -> s499,5,,42,500,2000,0,499,4331.1879999237135,500,0,0,2639,,

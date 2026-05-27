@@ -25,12 +25,12 @@ See Also:
     floyd_warshall_osken_controller.py - all-pairs, same relaxation idea
 """
 
-import json
 import os
 import sys
 
 from base_controller import SPFBaseController
 from algorithms.bellman_ford import bellman_ford
+from algorithms.weight_utils import build_directed_metric_dict, load_link_metrics, bandwidth_to_costs
 
 BF_FLOW_COOKIE = 0x42464F520000000001  # "BFOR" in hex (truncated to 64-bit)
 BF_FLOW_COOKIE = 0x42464F5200000001
@@ -39,22 +39,17 @@ BF_FLOW_PRIORITY = 100
 
 # Optional static weight file — relative to this controller's directory.
 # Format: {"links": {""dpid1:dpid2"": {"bandwidth_mbps": 100}, ...}}
-WEIGHTS_FILE = os.path.join(os.path.dirname(__file__), "link_weights.json")
+WEIGHTS_FILE = os.environ.get(
+    "SPF_WEIGHTS_FILE",
+    os.path.join(os.path.dirname(__file__), "link_weights.json"),
+)
+WEIGHT_FIELD = os.environ.get("SPF_WEIGHT_FIELD", "bandwidth_mbps")
+REF_BANDWIDTH = float(os.environ.get("SPF_REF_BANDWIDTH", "1000"))
 
 
 def _load_weights(path):
     """Load link weights from JSON; return {} if file is absent or malformed."""
-    try:
-        with open(path) as f:
-            data = json.load(f)
-        # Convert "dpid1:dpid2" string keys to (int, int) tuples.
-        raw = data.get("links", {})
-        return {
-            tuple(int(x) for x in k.split(":")): v.get("bandwidth_mbps", 1)
-            for k, v in raw.items()
-        }
-    except (FileNotFoundError, json.JSONDecodeError, ValueError):
-        return {}
+    return load_link_metrics(path, WEIGHT_FIELD)
 
 
 class BellmanFordSwitch(SPFBaseController):
@@ -74,10 +69,7 @@ class BellmanFordSwitch(SPFBaseController):
 
     def __init__(self, *args, **kwargs):
         super(BellmanFordSwitch, self).__init__(*args, **kwargs)
-        # Load once at startup; topology changes do not affect link weights.
         raw_weights = _load_weights(WEIGHTS_FILE)
-        # Convert to adjacency-indexed form: (u, v) -> weight
-        self._link_weights = raw_weights
         if raw_weights:
             self.logger.info("[BF-WEIGHTS] loaded %d link weights from %s",
                              len(raw_weights), WEIGHTS_FILE)
@@ -85,16 +77,18 @@ class BellmanFordSwitch(SPFBaseController):
             self.logger.info("[BF-WEIGHTS] no weight file; using hop-count metric")
 
     def _build_weight_dict(self):
-        """Build weights dict keyed by (u, v) from current adjacency."""
-        if not self._link_weights:
+        """Build weights dict keyed by (u, v) from current adjacency.
+
+        The JSON file is reloaded for each path computation so runtime weight
+        changes are visible immediately.
+        """
+        link_weights = _load_weights(WEIGHTS_FILE)
+        if not link_weights:
             return None          # algorithms/bellman_ford uses hop-count by default
-        weights = {}
-        for u in self.adjacency:
-            for v, _ in self.adjacency[u]:
-                key = (min(u, v), max(u, v))
-                weights[(u, v)] = self._link_weights.get(key, 1)
-                weights[(v, u)] = self._link_weights.get(key, 1)
-        return weights
+        directed = build_directed_metric_dict(self.adjacency, link_weights)
+        if WEIGHT_FIELD == "bandwidth_mbps":
+            return bandwidth_to_costs(directed, ref_bandwidth=REF_BANDWIDTH)
+        return directed
 
     def compute_path(self, src, dst, first_port, final_port):
         """Compute shortest path using Bellman-Ford edge-relaxation.

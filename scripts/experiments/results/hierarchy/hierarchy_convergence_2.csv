@@ -1,0 +1,9 @@
+scenario_type,algorithm,controller,topology_event,convergence_id,convergence_t1,convergence_t2,convergence_ms,path,hop_count,controller_log,phantom_seed,phantom_nodes,phantom_edges,source_node,destination_node,computation_time_us,nodes_visited,queue_pops,heap_pops,relaxations,path_source,convergence_source
+scenario_a,bfs,bfs_osken_controller.py,Core1<->Core3_down,1,4864.663797332,,10082.712515000821,s1,0,/tmp/hierarchy_conv_bfs_7fkr4p7c/controller.log,,,,,,,,,,,controller_log,fallback_elapsed
+scenario_b,bfs,phantom_graph,,,,,,s0 -> s388 -> s389 -> s268 -> s499,4,,42,500,2000,0,499,460.13500013941666,418,418,0,0,,
+scenario_a,astar,astar_osken_controller.py,Core1<->Core3_down,1,4920.412702908,,10005.563220000113,s10 -> s4 -> s1 -> s2 -> s6 -> s13,5,/tmp/hierarchy_conv_astar_u4a63d51/controller.log,,,,,,,,,,,topology_fallback,fallback_elapsed
+scenario_b,astar,phantom_graph,,,,,,s0 -> s388 -> s16 -> s17 -> s268 -> s499,5,,42,500,2000,0,499,974.2199999891454,252,0,266,784,,
+scenario_a,bellman-ford,bellman_ford_osken_controller.py,Core1<->Core3_down,1,4976.090563204,,10079.47016199978,s6 -> s13,1,/tmp/hierarchy_conv_bellman-ford_1jcdc9fi/controller.log,,,,,,,,,,,controller_log,fallback_elapsed
+scenario_b,bellman-ford,phantom_graph,,,,,,s0 -> s388 -> s16 -> s17 -> s268 -> s499,5,,42,500,2000,0,499,6613.428000491695,500,0,0,2639,,
+scenario_a,dijkstra,dijkstra_osken_controller.py,Core1<->Core3_down,,,,10005.874073999621,s10 -> s4 -> s1 -> s2 -> s6 -> s13,5,/tmp/hierarchy_conv_dijkstra_wowiuzli/controller.log,,,,,,,,,,,topology_fallback,fallback_elapsed
+scenario_b,dijkstra,phantom_graph,,,,,,s0 -> s388 -> s16 -> s17 -> s268 -> s499,5,,42,500,2000,0,499,791.8480005173478,285,0,307,802,,

@@ -24,11 +24,24 @@ import sys
 
 from base_controller import SPFBaseController
 from algorithms.astar import astar, build_reverse_hop_heuristic
+from algorithms.weight_utils import build_directed_metric_dict, load_link_metrics, bandwidth_to_costs
 
 # Module-level exports used by astar_multipath_osken_controller.py
 ASTAR_FLOW_COOKIE = 0x4153545200000001
 ASTAR_FLOW_COOKIE_MASK = 0xFFFFFFFFFFFFFFFF
 ASTAR_FLOW_PRIORITY = 100
+
+WEIGHTS_FILE = os.environ.get(
+    "SPF_WEIGHTS_FILE",
+    os.path.join(os.path.dirname(__file__), "link_weights.json"),
+)
+WEIGHT_FIELD = os.environ.get("SPF_WEIGHT_FIELD", "bandwidth_mbps")
+REF_BANDWIDTH = float(os.environ.get("SPF_REF_BANDWIDTH", "1000"))
+
+
+def _load_weights(path):
+    """Load link weights from JSON; return {} if file is absent or malformed."""
+    return load_link_metrics(path, WEIGHT_FIELD)
 
 
 class AStarSwitch(SPFBaseController):
@@ -46,6 +59,26 @@ class AStarSwitch(SPFBaseController):
         # Cache: dst -> {node: hop_distance_to_dst}
         # Invalidated whenever the topology changes.
         self.heuristic_hop_cache = {}
+        raw_weights = _load_weights(WEIGHTS_FILE)
+        if raw_weights:
+            self.logger.info("[ASTAR-WEIGHTS] loaded %d link weights from %s",
+                             len(raw_weights), WEIGHTS_FILE)
+        else:
+            self.logger.info("[ASTAR-WEIGHTS] no weight file; using hop-count metric")
+
+    def _build_weight_dict(self):
+        """Build weights dict keyed by (u, v) from the current adjacency.
+
+        The JSON file is reloaded for each query so weight changes are picked
+        up dynamically.
+        """
+        link_weights = _load_weights(WEIGHTS_FILE)
+        if not link_weights:
+            return None
+        directed = build_directed_metric_dict(self.adjacency, link_weights)
+        if WEIGHT_FIELD == "bandwidth_mbps":
+            return bandwidth_to_costs(directed, ref_bandwidth=REF_BANDWIDTH)
+        return directed
 
     def _on_topology_changed(self):
         """Clear heuristic cache so stale hop-distances are not reused."""
@@ -63,22 +96,30 @@ class AStarSwitch(SPFBaseController):
         self.logger.debug("[PATH-QUERY] A*: s%d -> s%d", src, dst)
 
         # --- Phase 1: Get or compute heuristic for this destination ---
-        # h[v] = lower-bound hop distance from v to dst.
-        # Cached per destination; cache cleared on topology change.
-        if dst not in self.heuristic_hop_cache:
-            self.heuristic_hop_cache[dst] = build_reverse_hop_heuristic(
-                self.adjacency, dst
-            )
-            self.logger.debug(
-                "[A*-CACHE] built heuristic for dst=s%d size=%d",
-                dst, len(self.heuristic_hop_cache[dst]),
-            )
-        heuristic = self.heuristic_hop_cache[dst]
+        # h[v] = lower-bound cost estimate from v to dst.
+        # For hop-count routing we use reverse BFS. For weighted routing
+        # (e.g. delay_ms) we fall back to zero heuristic to preserve admissibility.
+        if WEIGHT_FIELD == "bandwidth_mbps":
+            if dst not in self.heuristic_hop_cache:
+                self.heuristic_hop_cache[dst] = build_reverse_hop_heuristic(
+                    self.adjacency, dst
+                )
+                self.logger.debug(
+                    "[A*-CACHE] built heuristic for dst=s%d size=%d",
+                    dst, len(self.heuristic_hop_cache[dst]),
+                )
+            heuristic = self.heuristic_hop_cache[dst]
+        else:
+            heuristic = {node: 0 for node in self.adjacency}
+            heuristic[dst] = 0
+            self.logger.debug("[A*-HEURISTIC] weighted metric=%s, using zero heuristic",
+                              WEIGHT_FIELD)
 
         # --- Phase 2: Run A* from src guided by heuristic ---
         # distance[v] = g(v): actual shortest hop count from src to v
         # previous[v]:        predecessor on the shortest path
-        distance, previous = astar(self.adjacency, src, dst, heuristic)
+        weights = self._build_weight_dict()
+        distance, previous = astar(self.adjacency, src, dst, heuristic, weights=weights)
 
         reachable = sum(1 for d in distance.values() if d != float("inf"))
         self.logger.info("[SPF-DONE] A* s%d->s%d reachable=%d/%d",

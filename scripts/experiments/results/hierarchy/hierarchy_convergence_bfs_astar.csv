@@ -1,0 +1,3 @@
+scenario_type,algorithm,controller,topology_event,convergence_id,convergence_t1,convergence_t2,convergence_ms,path,hop_count,controller_log,phantom_seed,phantom_nodes,phantom_edges,source_node,destination_node,computation_time_us,nodes_visited,queue_pops,heap_pops,relaxations,path_source,convergence_source
+scenario_a,bfs,bfs_osken_controller.py,Core1<->Core2_down,1,8259.411202255,8259.454539999,43.338,s10 -> s4 -> s1 -> s2 -> s7 -> s13,5,/tmp/hierarchy_conv_bfs__17cmkck/controller.log,,,,,,,,,,,controller_log,controller_log
+scenario_b,bfs,phantom_graph,,,,,,s0 -> s388 -> s389 -> s268 -> s499,4,,42,500,2000,0,499,505.4440007370431,418,418,0,0,,

@@ -1,0 +1,5 @@
+scenario_type,algorithm,controller,topology_event,convergence_id,convergence_t1,convergence_t2,convergence_ms,path,hop_count,controller_log,path_source,convergence_source
+scenario_a,bfs,bfs_osken_controller.py,Core1<->Core2_down,1,15687.912323065,15688.951846004,1039.523,s16 -> s4 -> s1 -> s3 -> s2 -> s6 -> s19,6,controller_bfs.log,controller_log,controller_log
+scenario_a,dijkstra,dijkstra_osken_controller.py,Core1<->Core2_down,1,15313.593681172,15314.412642474,818.961,s16 -> s4 -> s1 -> s2 -> s6 -> s19,5,controller_dijkstra.log,controller_log,controller_log
+scenario_a,astar,astar_osken_controller.py,Core1<->Core2_down,1,16122.737519472,16125.079620155,2342.101,s16 -> s4 -> s1 -> s2 -> s6 -> s19,5,controller_astar.log,controller_log,controller_log
+scenario_a,bellman-ford,bellman_ford_osken_controller.py,Core1<->Core2_down,1,16795.640622965,16796.357846360,717.223,s16 -> s4 -> s1 -> s3 -> s2 -> s6 -> s19,6,controller_bellman_ford.log,controller_log,controller_log

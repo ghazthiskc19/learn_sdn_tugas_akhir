@@ -99,7 +99,7 @@ class KShortestPathsController(SPFBaseController):
             priority=K_SHORTEST_PRIORITY,
             match=match,
         ))
-        datapath.send_msg(parser.OFPFlowMod(
+        add_mod = parser.OFPFlowMod(
             datapath=datapath,
             cookie=K_SHORTEST_COOKIE,
             command=ofproto.OFPFC_ADD,
@@ -108,7 +108,9 @@ class KShortestPathsController(SPFBaseController):
             priority=K_SHORTEST_PRIORITY,
             match=match,
             instructions=inst,
-        ))
+        )
+        datapath.send_msg(add_mod)
+        self._mark_convergence_flowmod()
 
     def _install_select_group(self, datapath, group_id, out_ports):
         """Install or replace OpenFlow SELECT group (one bucket per next-hop)."""
