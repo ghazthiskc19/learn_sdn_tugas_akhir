@@ -7,41 +7,38 @@ import matplotlib.pyplot as plt
 import pandas as pd
 
 
-TARGET_ALGORITHMS = ["astar", "dijkstra", "bellman-ford", "bfs"]
+TARGET_ALGORITHMS = ["astar", "dijkstra", "bellman-ford"]
 STYLE_MAP = {
 	"astar": {"color": "#1f77b4", "linestyle": "-", "marker": "o", "linewidth": 2.6},
 	"dijkstra": {"color": "#ff7f0e", "linestyle": "--", "marker": "s", "linewidth": 2.4},
 	"bellman-ford": {"color": "#2ca02c", "linestyle": ":", "marker": "^", "linewidth": 2.4},
-	"bfs": {"color": "#d62728", "linestyle": "-.", "marker": "D", "linewidth": 2.4},
 }
 DISPLAY_NAME = {
 	"astar": "A*",
 	"dijkstra": "Dijkstra",
 	"bellman-ford": "Bellman-Ford",
-	"bfs": "BFS",
 }
 LABEL_OFFSETS = {
 	"astar": (8, 0),
 	"dijkstra": (8, 8),
 	"bellman-ford": (8, -8),
-	"bfs": (8, 14),
 }
 
 
 def parse_args() -> argparse.Namespace:
 	parser = argparse.ArgumentParser(
-		description="Plot mesh latency as a single-panel line chart."
+		description="Plot hierarchy latency as a single-panel line chart."
 	)
 	parser.add_argument(
 		"--input",
 		type=Path,
-		default=Path(__file__).parent / "data" / "mesh_latency.csv",
-		help="Path to the mesh latency CSV file.",
+		default=Path(__file__).with_name("hierarchy_latency.csv"),
+		help="Path to the latency CSV file.",
 	)
 	parser.add_argument(
 		"--output",
 		type=Path,
-		default=Path(__file__).parent / "mesh_latency_lineplot.png",
+		default=Path(__file__).with_name("hierarchy_latency_lineplot.png"),
 		help="Output image path.",
 	)
 	parser.add_argument(
@@ -116,7 +113,7 @@ def plot_latency(frame: pd.DataFrame, output_path: Path) -> None:
 			fontweight="bold",
 		)
 
-	ax.set_title("Mesh Latency vs ICMP Sequence", fontsize=15, fontweight="bold")
+	ax.set_title("Hierarchy Latency vs ICMP Sequence", fontsize=15, fontweight="bold")
 	ax.set_xlabel("icmp_seq", fontsize=12)
 	ax.set_ylabel("rtt_ms", fontsize=12)
 
