@@ -197,68 +197,53 @@ def save_operation_stacked_bar(frame: pd.DataFrame, output_path: Path) -> None:
 	queue = [float(data.loc[data["algorithm"] == algo, "queue_pops"].iloc[0]) for algo in algorithms]
 	heap = [float(data.loc[data["algorithm"] == algo, "heap_pops"].iloc[0]) for algo in algorithms]
 	relax = [float(data.loc[data["algorithm"] == algo, "relaxations"].iloc[0]) for algo in algorithms]
-	max_stack = max((q + h + r for q, h, r in zip(queue, heap, relax)), default=1.0)
-	zero_height = max(0.15, max_stack * 0.001)
+	bar_width = 0.24
 
-	def draw_segment(x_pos: float, bottom: float, value: float, color: str, label: str, zero_hatch: str | None = None):
-		visible_value = value if value > 0 else zero_height
-		bar = ax.bar(
-			x_pos,
-			visible_value,
-			bottom=bottom,
-			color=color if value > 0 else "white",
-			edgecolor="#1f1f1f",
-			width=0.62,
-			label=label,
-			hatch=zero_hatch if value <= 0 and zero_hatch else None,
-			linewidth=1.0,
-			alpha=1.0 if value > 0 else 0.9,
-		)
-		segment = bar[0]
-		if value <= 0:
-			segment.set_facecolor("white")
-			segment.set_edgecolor(color)
-			segment.set_linewidth(1.4)
-			segment.set_hatch(zero_hatch or "///")
-			label_y = bottom + visible_value + max_stack * 0.006
+	queue_bars = ax.bar(
+		[x - bar_width for x in x_positions],
+		queue,
+		width=bar_width,
+		color="#4c78a8",
+		edgecolor="#1f1f1f",
+		label="queue_pops",
+	)
+	heap_bars = ax.bar(
+		x_positions,
+		heap,
+		width=bar_width,
+		color="#f58518",
+		edgecolor="#1f1f1f",
+		label="heap_pops",
+	)
+	relax_bars = ax.bar(
+		[x + bar_width for x in x_positions],
+		relax,
+		width=bar_width,
+		color="#54a24b",
+		edgecolor="#1f1f1f",
+		label="relaxations",
+	)
+
+	for bars in (queue_bars, heap_bars, relax_bars):
+		for bar in bars:
+			height = bar.get_height()
 			ax.annotate(
-				"0",
-				xy=(x_pos, label_y),
-				xytext=(0, 0),
+				f"{height:,.0f}",
+				xy=(bar.get_x() + bar.get_width() / 2, height),
+				xytext=(0, 4),
 				textcoords="offset points",
 				ha="center",
 				va="bottom",
 				fontsize=8,
 				fontweight="bold",
-				color=color,
 			)
-		else:
-			ax.annotate(
-				f"{value:,.0f}",
-				xy=(x_pos, bottom + visible_value / 2),
-				xytext=(0, 0),
-				textcoords="offset points",
-				ha="center",
-				va="center",
-				fontsize=8,
-				fontweight="bold",
-				color="white" if visible_value > max_stack * 0.08 else "black",
-			)
-		return segment
-
-	queue_bars = []
-	heap_bars = []
-	relax_bars = []
-	for x_pos, q_val, h_val, r_val in zip(x_positions, queue, heap, relax):
-		queue_bars.append(draw_segment(x_pos, 0, q_val, "#4c78a8", "queue_pops", zero_hatch="..."))
-		heap_bars.append(draw_segment(x_pos, q_val, h_val, "#f58518", "heap_pops", zero_hatch="///"))
-		relax_bars.append(draw_segment(x_pos, q_val + h_val, r_val, "#54a24b", "relaxations", zero_hatch="xxx"))
 
 	ax.set_xticks(x_positions)
 	ax.set_xticklabels([DISPLAY_NAME[a] for a in algorithms], fontsize=11)
 	ax.set_ylabel("Operation count", fontsize=11)
 	ax.set_title("Scenario B - Search Effort Breakdown", fontsize=14, fontweight="bold")
-	ax.set_ylim(0, max_stack * 1.12)
+	max_value = max((max(queue, default=0.0), max(heap, default=0.0), max(relax, default=0.0)))
+	ax.set_ylim(0, max_value * 1.2 if max_value > 0 else 1)
 	base_bar_style(ax)
 	ax.legend(loc="upper left", bbox_to_anchor=(1.02, 1.0), frameon=True, title="Metric")
 	fig.tight_layout()
@@ -408,13 +393,13 @@ def main() -> None:
 		"scenario_b_path": args.output_dir / "hierarchy_visualize_convergence_scenario_b_path_1.png",
 	}
 
-	save_convergence_ms_plot(frame, outputs["scenario_a_convergence_ms"])
-	save_computation_time_plot(frame, outputs["scenario_b_computation_time"])
-	save_nodes_visited_plot(frame, outputs["scenario_b_nodes_visited"])
+	# save_convergence_ms_plot(frame, outputs["scenario_a_convergence_ms"])
+	# save_computation_time_plot(frame, outputs["scenario_b_computation_time"])
+	# save_nodes_visited_plot(frame, outputs["scenario_b_nodes_visited"])
 	save_operation_stacked_bar(frame, outputs["scenario_b_operation_stacked"])
-	save_operation_table(frame, outputs["scenario_b_operation_table"])
-	save_hop_count_plot(frame, outputs["scenario_b_hop_count"])
-	save_path_panel(frame, outputs["scenario_b_path"])
+	# save_operation_table(frame, outputs["scenario_b_operation_table"])
+	# save_hop_count_plot(frame, outputs["scenario_b_hop_count"])
+	# save_path_panel(frame, outputs["scenario_b_path"])
 
 	print("Generated:")
 	for path in outputs.values():
