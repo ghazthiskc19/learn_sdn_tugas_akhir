@@ -42,10 +42,10 @@ import seaborn as sns
 # Paths — dihitung relatif terhadap lokasi script ini
 # ─────────────────────────────────────────────────────────────────────────────
 
-SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
-REPO_ROOT = os.path.dirname(os.path.dirname(SCRIPT_DIR))  # 2 level ke atas → learn_sdn/
-RESULTS_BASE = os.path.join(REPO_ROOT, "scripts", "experiments", "results")
-OUTPUT_BASE = os.path.join(REPO_ROOT, "visualize")
+SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))  # .../scripts/visualize
+REPO_ROOT = os.path.dirname(os.path.dirname(SCRIPT_DIR))  # .../learn_sdn  (2 level up)
+RESULTS_BASE = os.path.join(REPO_ROOT, "results")  # .../learn_sdn/results
+OUTPUT_BASE = os.path.join(REPO_ROOT, "visualize")  # .../learn_sdn/visualize
 
 # ─────────────────────────────────────────────────────────────────────────────
 # Menu Options
