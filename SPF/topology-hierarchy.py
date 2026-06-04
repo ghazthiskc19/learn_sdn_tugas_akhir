@@ -59,7 +59,7 @@ class HierarchyTopo(Topo):
         
         self.addLink(DistB1, AccessB1, port1=1, port2=3, bw=500, delay='1ms', use_hfsc=True)
         self.addLink(DistB2, AccessB1, port1=1, port2=4, bw=500, delay='1ms', use_hfsc=True)
-        self.addLink(DistB1, AccessB2, port1=2, port2=3, bw=500, delay='1ms', use_hfsc=True)
+        self.addLink(DistB1, AccessB2, port1=2, port2=3, bw=1000, delay='1ms', use_hfsc=True)
         self.addLink(DistB2, AccessB2, port1=2, port2=4, bw=500, delay='1ms', use_hfsc=True)
 
         # Inter-distribution links
@@ -68,12 +68,12 @@ class HierarchyTopo(Topo):
 
         # Distribution ke Core
         self.addLink(DistA1, CoreA, port1=4, port2=1, bw=1000, delay='0.5ms', use_hfsc=True)
-        self.addLink(DistA2, CoreA, port1=4, port2=2, bw=500, delay='0.5ms', use_hfsc=True)
-        self.addLink(DistB1, CoreB, port1=4, port2=1, bw=900, delay='0.5ms', use_hfsc=True)
+        self.addLink(DistA2, CoreA, port1=4, port2=2, bw=400, delay='0.5ms', use_hfsc=True)
+        self.addLink(DistB1, CoreB, port1=4, port2=1, bw=1000, delay='0.5ms', use_hfsc=True)
         self.addLink(DistB2, CoreB, port1=4, port2=2, bw=900, delay='0.5ms', use_hfsc=True)
 
         # Core backbone: menghubungkan CoreA dan CoreB langsung
-        self.addLink(CoreA, CoreB, port1=3, port2=3, bw=500, delay='0.5ms', use_hfsc=True)
+        self.addLink(CoreA, CoreB, port1=3, port2=3, bw=400, delay='0.5ms', use_hfsc=True)
         self.addLink(CoreB, CoreC, port1=4, port2=3, bw=1000, delay='0.5ms', use_hfsc=True)
         self.addLink(CoreC, CoreA, port1=4, port2=4, bw=1000, delay='50ms', use_hfsc=True)
 
